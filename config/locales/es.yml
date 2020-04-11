@@ -200,13 +200,13 @@ es:
     designs: Diseño personalizado
     authentication: Autentificación de usuario
   footer:
-    powered_by: "Funciona con %{href}"
+    powered_by: "AulaParaTodos es un servicio %{href}"
   forgot_password:
     subtitle: Olvidé la contraseña
     email: Cuenta de correo
     submit: Enviar
   go_back: Atrás
-  greenlight: Greenlight
+  greenlight: Minsit S.A.S.
   header:
     all_recordings: Todas las grabaciones
     dropdown:
