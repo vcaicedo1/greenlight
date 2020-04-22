@@ -26,6 +26,14 @@ class Setting < ApplicationRecord
     feature.update_attributes(value: value, enabled: true)
   end
 
+  def get_logo
+    if params[:id]
+      render_text params[:id]
+    else
+      render_text 'Sin parametros'
+    end
+  end
+
   # Returns the value if enabled or the default if not enabled
   def get_value(name)
     # Return feature value if already exists
