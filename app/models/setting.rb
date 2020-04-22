@@ -26,7 +26,7 @@ class Setting < ApplicationRecord
     feature.update_attributes(value: value, enabled: true)
   end
 
-  def get_logo
+  def get_css
     if params[:id]
       return params[:id]
     else
@@ -55,11 +55,13 @@ class Setting < ApplicationRecord
     # return default value
     case name
     when "Branding Image"
-      style_org = 'default'
-      if style_org == 'claro'
-        Rails.configuration.branding_image_default
-      else style_org == 'default'
+      org_css = get_css
+      if org_css == 'claro'
         Rails.configuration.branding_image_claro
+      elsif org_css == 'go'
+        Rails.configuration.branding_image_gobernacion
+      else org_css == 'default'
+        Rails.configuration.branding_image_default
       end
     when "Primary Color"
       Rails.configuration.primary_color_default
