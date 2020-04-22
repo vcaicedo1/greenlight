@@ -55,7 +55,7 @@ class Setting < ApplicationRecord
     # return default value
     case name
     when "Branding Image"
-      org_css = get_css
+      org_css = get_css()
       if org_css == 'claro'
         Rails.configuration.branding_image_claro
       elsif org_css == 'go'
