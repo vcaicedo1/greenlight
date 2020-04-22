@@ -161,4 +161,19 @@ module Greenlight
     # Default admin password
     config.admin_password_default = ENV['ADMIN_PASSWORD'] || 'administrator'
   end
+
+
+  public
+
+  def get_css
+    request.query_string.split(/&/).inject({}) do |hash, setting|
+      key, val = setting.split(/=/)
+      hash[key.to_sym] = val
+      hash
+      puts(hash)
+    end
+
+    return 'default'
+  
+  end
 end
