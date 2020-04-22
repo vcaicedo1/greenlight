@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user.provider = @user_domain
 
     # User or recpatcha is not valid
-    render("sessions/newinstitution") && return unless valid_user_or_captcha
+    render("sessions/new") && return unless valid_user_or_captcha
 
     # Redirect to root if user token is either invalid or expired
     return redirect_to root_path, flash: { alert: I18n.t("registration.invite.fail") } unless passes_invite_reqs

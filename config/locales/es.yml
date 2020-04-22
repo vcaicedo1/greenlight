@@ -479,10 +479,11 @@ es:
     search: Buscar
   signup:
     password_confirm: Confirmación de contraseña
-    subtitle: Crear una cuentassssssss
+    subtitle: Crear una cuenta
     title: Registrarse
     with: "Registrarse utilizando %{provider}"
     organization_data: Datos de la organización
+    next: Siguiente
   terms:
     accept: Accepto los términos y condiciones
     accept_existing: Acepto los términos y condiciones
