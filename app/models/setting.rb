@@ -47,7 +47,7 @@ class Setting < ApplicationRecord
     # return default value
     case name
     when "Branding Image"
-      Rails.configuration.branding_image_default
+      Rails.configuration.branding_image_claro
     when "Primary Color"
       Rails.configuration.primary_color_default
     when "Registration Method"
