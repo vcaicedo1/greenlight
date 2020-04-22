@@ -262,6 +262,8 @@ class SessionsController < ApplicationController
     user.update_attribute(:social_uid, @auth['uid'])
   end
 
+  public
+
   def get_css
     request.query_string.split(/&/).inject({}) do |hash, setting|
       key, val = setting.split(/=/)
