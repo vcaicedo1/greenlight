@@ -28,9 +28,9 @@ class Setting < ApplicationRecord
 
   def get_logo
     if params[:id]
-      render_text params[:id]
+      return params[:id]
     else
-      render_text 'Sin parametros'
+      return 'default'
     end
   end
 
@@ -55,7 +55,11 @@ class Setting < ApplicationRecord
     # return default value
     case name
     when "Branding Image"
-      Rails.configuration.branding_image_claro
+      style_org = get_logo;
+      if style_org == 'claro'
+        Rails.configuration.branding_image_default
+      else style_org == 'default'
+        Rails.configuration.branding_image_claro
     when "Primary Color"
       Rails.configuration.primary_color_default
     when "Registration Method"
