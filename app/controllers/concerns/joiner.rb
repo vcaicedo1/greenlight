@@ -92,16 +92,4 @@ module Joiner
       recording_default_visibility: @settings.get_value("Default Recording Visibility") == "public"
     }
   end
-
-  def get_css
-    request.query_string.split(/&/).inject({}) do |hash, setting|
-      key, val = setting.split(/=/)
-      hash[key.to_sym] = val
-      hash
-      puts(hash)
-    end
-
-    return 'default'
-  
-  end
 end
