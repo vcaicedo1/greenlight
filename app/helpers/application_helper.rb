@@ -104,7 +104,7 @@ module ApplicationHelper
     false
   end
 
-  def create(type)
+  def create_account(type)
     if type=='user'
       return true
     else
