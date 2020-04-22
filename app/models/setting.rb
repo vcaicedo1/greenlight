@@ -26,18 +26,6 @@ class Setting < ApplicationRecord
     feature.update_attributes(value: value, enabled: true)
   end
 
-  def get_css
-    request.query_string.split(/&/).inject({}) do |hash, setting|
-      key, val = setting.split(/=/)
-      hash[key.to_sym] = val
-      hash
-      puts(hash)
-    end
-
-    return 'default'
-  
-  end
-
   # Returns the value if enabled or the default if not enabled
   def get_value(name)
     # Return feature value if already exists
@@ -59,7 +47,7 @@ class Setting < ApplicationRecord
     # return default value
     case name
     when "Branding Image"
-      org_css = get_css()
+      org_css = @sessions_controller.get_css()
       if org_css == 'claro'
         Rails.configuration.branding_image_claro
       elsif org_css == 'go'
