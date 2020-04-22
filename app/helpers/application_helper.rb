@@ -103,4 +103,12 @@ module ApplicationHelper
   rescue URI::InvalidURIError
     false
   end
+
+  def create(type)
+    if type=='user'
+      return true
+    else
+      return false
+  end
+
 end
