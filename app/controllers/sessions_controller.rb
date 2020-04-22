@@ -261,18 +261,4 @@ class SessionsController < ApplicationController
     # Set the user's social id to the one being returned from auth
     user.update_attribute(:social_uid, @auth['uid'])
   end
-
-  public
-
-  def get_css
-    request.query_string.split(/&/).inject({}) do |hash, setting|
-      key, val = setting.split(/=/)
-      hash[key.to_sym] = val
-      hash
-      puts(hash)
-    end
-
-    return 'default'
-  
-  end
 end
