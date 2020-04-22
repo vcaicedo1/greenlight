@@ -60,6 +60,7 @@ class Setting < ApplicationRecord
         Rails.configuration.branding_image_default
       else style_org == 'default'
         Rails.configuration.branding_image_claro
+      end
     when "Primary Color"
       Rails.configuration.primary_color_default
     when "Registration Method"
