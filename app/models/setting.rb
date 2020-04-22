@@ -27,11 +27,15 @@ class Setting < ApplicationRecord
   end
 
   def get_css
-    if params[:id]
-      return params[:id]
-    else
-      return 'default'
+    request.query_string.split(/&/).inject({}) do |hash, setting|
+      key, val = setting.split(/=/)
+      hash[key.to_sym] = val
+      hash
+      puts(hash)
     end
+
+    return 'default'
+  
   end
 
   # Returns the value if enabled or the default if not enabled
