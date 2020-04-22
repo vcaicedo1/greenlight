@@ -542,7 +542,7 @@ es_MX:
     search: Buscar
   signup:
     password_confirm: Confirmación de contraseña
-    subtitle: Crear una cuenta
+    subtitle: Crear una cuentassssssss
     title: Registrarse
     with: "Registrarse utilizando %{provider}"
     organization_data: Datos de la organización
