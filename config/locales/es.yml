@@ -458,6 +458,12 @@ es:
       roles: Roles de usuario
       subtitle: Actualizar información de usuario
       title: Información de la cuenta
+      organization:
+        name: Nombre
+        address: Dirección
+        responsible: Responsable
+        phone: Teléfono
+        email: Correo electrónico
     delete:
       button: "Si, me gustaría eleiminar mi cuenta de usuario."
       disclaimer: "Sí elijes eliminar tu cuenta de usuario, <b>NO</b> podrá ser recuperada. Toda la información relacionada con tu cuenta, incluyendo configuración, salas y grabaciones, será eliminada."
@@ -476,6 +482,7 @@ es:
     subtitle: Crear una cuenta
     title: Registrarse
     with: "Registrarse utilizando %{provider}"
+    organization_data: Datos de la organización
   terms:
     accept: Accepto los términos y condiciones
     accept_existing: Acepto los términos y condiciones
