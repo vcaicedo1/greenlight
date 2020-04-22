@@ -76,8 +76,6 @@
                   <div class="invalid-feedback d-block"><%= @user.errors.full_messages_for(:base).first %></div>
                 </div>
               <% end %>
-
-              <%= t("signup.next"), class: "btn btn-primary btn-block signin-button" %>
               <%= f.submit t("signup.title"), class: "btn btn-primary btn-block signin-button" %>
             </div>
           <% end %>
