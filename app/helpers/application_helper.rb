@@ -103,12 +103,4 @@ module ApplicationHelper
   rescue URI::InvalidURIError
     false
   end
-
-  def create_account(type)
-    if type == "user"
-      return "signup.subtitle"
-    else
-      return "signup.organization_data"
-  end
-
 end
