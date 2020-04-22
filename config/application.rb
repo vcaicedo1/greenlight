@@ -132,6 +132,7 @@ module Greenlight
     # Default branding image if the user does not specify one
     config.branding_image_default = "https://app.aulaparatodos.com/images/logo_with_text.png"
     config.branding_image_claro = "http://192.168.1.67/images/logo_with_text_claro.png"
+    config.branding_image_gobernacion = "http://192.168.1.67/images/logo_with_text_gobernacion.png"
 
     # Default primary color if the user does not specify one
     config.primary_color_default = "#467fcf"
