@@ -105,10 +105,10 @@ module ApplicationHelper
   end
 
   def create_account(type)
-    if type=='user'
-      return true
+    if type == "user"
+      return "signup.subtitle"
     else
-      return false
+      return "signup.organization_data"
   end
 
 end
