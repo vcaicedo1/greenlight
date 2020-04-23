@@ -52,7 +52,7 @@ class RecordingsController < ApplicationController
   private
 
   def find_room
-    puts("Test: 2")
+    logger.info "Test: 2"
     @room = Room.find_by!(bbb_id: params[:meetingID])
   end
 

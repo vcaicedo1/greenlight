@@ -145,7 +145,7 @@ class RoomsController < ApplicationController
     begin
       @room = Room.find_by!(uid: room_uid)
       @server_redirect = "go/"
-      puts("Test:" + @server_redirect.to_s)
+      logger.info "Test: 4"
     rescue ActiveRecord::RecordNotFound
       return redirect_to current_user.main_room, alert: I18n.t("room.no_room.invalid_room_uid")
     end
@@ -297,7 +297,7 @@ class RoomsController < ApplicationController
 
   # Find the room from the uid.
   def find_room
-    puts("Test: 1")
+    logger.info "Test: 1"
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
 

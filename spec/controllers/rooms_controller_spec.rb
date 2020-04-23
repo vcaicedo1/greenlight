@@ -240,7 +240,7 @@ describe RoomsController, type: :controller do
 
       @request.session[:user_id] = @user.id
       post :join, params: { room_uid: @room, join_name: @user.name }
-
+      logger.info "Test: 3"
       expect(response).to redirect_to(join_path(@owner.main_room, @user.name, {}, @user.uid))
     end
 
