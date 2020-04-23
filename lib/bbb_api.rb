@@ -8,6 +8,8 @@ module BbbApi
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.68/bigbluebutton/api/"
     elsif user_role == "gobernacion"
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.69/bigbluebutton/api/"
+    else
+      Rails.configuration.bigbluebutton_endpoint
     end
   end
 
@@ -17,7 +19,6 @@ module BbbApi
 
   # Sets a BigBlueButtonApi object for interacting with the API.
   def bbb(user_provider)
-    logger.info user_provider
     if Rails.configuration.loadbalanced_configuration
       user_domain = retrieve_provider_info(user_provider)
 
