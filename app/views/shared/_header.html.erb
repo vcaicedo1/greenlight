@@ -95,6 +95,7 @@
             </div>
           </div>
         <% else %>
+          <% application.original_url %>
           <% allow_greenlight_accounts = allow_greenlight_accounts? %>
           <% if allow_greenlight_accounts %>
             <%= link_to t("login"), signin_path + '?t=' + $load_css.to_s, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
