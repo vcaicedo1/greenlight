@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def bbb_server
-    logger.info Rails.configuration.loadbalanced_configuration
+    logger.info "prueba:#{Rails.configuration.loadbalanced_configuration}"
     @bbb_server ||= Rails.configuration.loadbalanced_configuration ? bbb(@user_domain) : bbb("greenlight")
   end
 

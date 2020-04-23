@@ -6,6 +6,7 @@ module BbbApi
   def bbb_endpoint
     logger.info "Por aqui paso 2"
     Rails.configuration.bigbluebutton_endpoint
+    logger.info "dtao:#{Rails.configuration.bigbluebutton_endpoint}"
   end
 
   def bbb_secret
