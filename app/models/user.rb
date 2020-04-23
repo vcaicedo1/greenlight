@@ -223,6 +223,15 @@ class User < ApplicationRecord
     false
   end
 
+  def has_role_org?(role)
+    # rubocop:enable Naming/PredicateName
+    roles.each do |single_role|
+      return true if single_role.name.end_with?(role.to_s)
+    end
+
+    false
+  end
+
   def self.with_role(role)
     User.all_users_with_roles.where(roles: { name: role })
   end

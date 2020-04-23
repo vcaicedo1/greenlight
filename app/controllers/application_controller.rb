@@ -41,11 +41,19 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def bbb_server
-    logger.info "Testeo1:#{current_user&.has_role?(:admin)}"
-    logger.info "Testeo2:#{current_user&.has_role?(:admin)}"
-    logger.info "Testeo3:#{current_user&.has_role}"
-    logger.info "Testeo4:#{User.username}"
+    apt_domain_name = apt_domain
+    logger.info "Testeo1:#{apt_domain_name}"
     @bbb_server ||= Rails.configuration.loadbalanced_configuration ? bbb(@user_domain) : bbb("greenlight")
+  end
+
+  def apt_domain
+    if current_user&.has_role_org?(:_claro)
+      apt_domain_name = "claro"
+    elsif current_user&.has_role_org?(:_gobv)
+      apt_domain_name = "gobv"
+    else
+      apt_domain_name = "default"
+    end
   end
 
   # Force SSL
