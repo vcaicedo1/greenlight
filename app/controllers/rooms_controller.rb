@@ -141,21 +141,20 @@ class RoomsController < ApplicationController
   # POST /room/join
   def join_specific_room
     room_uid = params[:join_room][:url].split('/').last
-    puts("Test:" + room_uid)
+
     begin
       @room = Room.find_by!(uid: room_uid)
-      @server_redirect = "go/"
-      logger.info "Test: 4"
     rescue ActiveRecord::RecordNotFound
       return redirect_to current_user.main_room, alert: I18n.t("room.no_room.invalid_room_uid")
     end
 
-    redirect_to room_path(@server_redirect + @room)
+    redirect_to room_path(@room)
   end
 
   # POST /:room_uid/start
   def start
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
+    logger.info "Support: #{current_user.has_role} is starting room #{@room.uid}"
 
     # Join the user in and start the meeting.
     opts = default_meeting_options
@@ -177,6 +176,8 @@ class RoomsController < ApplicationController
     # Notify users that the room has started.
     # Delay 5 seconds to allow for server start, although the request will retry until it succeeds.
     NotifyUserWaitingJob.set(wait: 5.seconds).perform_later(@room)
+
+    logger.info "---------------------------"
   end
 
   # POST /:room_uid/update_settings
@@ -297,14 +298,7 @@ class RoomsController < ApplicationController
 
   # Find the room from the uid.
   def find_room
-    logger.info "Test: 1"
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
-    logger.info @room.to_s
-    @testttttt = User.includes(:roles, :main_room).find_by(id: session[:user_id])
-    logger.info @testttttt.to_s
-    @current_userrrrrrrrr = User.includes(:roles, :main_room).find_by(id: session[:user_id])
-    logger.info @current_userrrrrrrrr.name
-    logger.info "-----------------------------------"
   end
 
   # Ensure the user either owns the room or is an admin of the room owner or the room is shared with him
