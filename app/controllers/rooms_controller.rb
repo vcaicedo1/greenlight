@@ -114,7 +114,7 @@ class RoomsController < ApplicationController
     cookies.encrypted[:greenlight_name] = @join_name unless cookies.encrypted[:greenlight_name] == @join_name
 
     save_recent_rooms
-
+    logger.info "#{current_user.has_role}"
     logger.info "Support: #{current_user.present? ? current_user.email : @join_name} is joining room #{@room.uid}"
     join_room(default_meeting_options)
   end
@@ -154,7 +154,6 @@ class RoomsController < ApplicationController
   # POST /:room_uid/start
   def start
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
-    logger.info "Test: #{current_user.has_role} is starting room #{@room.uid}"
 
     # Join the user in and start the meeting.
     opts = default_meeting_options
@@ -164,7 +163,7 @@ class RoomsController < ApplicationController
     room_settings = JSON.parse(@room[:room_settings])
     opts[:mute_on_start] = room_settings["muteOnStart"]
     opts[:require_moderator_approval] = room_settings["requireModeratorApproval"]
-    logger.info "Total: #{default_meeting_options}"
+
     begin
       redirect_to join_path(@room, current_user.name, opts, current_user.uid)
     rescue BigBlueButton::BigBlueButtonException => e
@@ -176,8 +175,6 @@ class RoomsController < ApplicationController
     # Notify users that the room has started.
     # Delay 5 seconds to allow for server start, although the request will retry until it succeeds.
     NotifyUserWaitingJob.set(wait: 5.seconds).perform_later(@room)
-
-    logger.info "---------------------------"
   end
 
   # POST /:room_uid/update_settings

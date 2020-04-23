@@ -13,6 +13,7 @@ module BbbApi
 
   # Sets a BigBlueButtonApi object for interacting with the API.
   def bbb(user_provider)
+    logger.info "Por aqui paso"
     if Rails.configuration.loadbalanced_configuration
       user_domain = retrieve_provider_info(user_provider)
 
