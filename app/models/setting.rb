@@ -26,6 +26,14 @@ class Setting < ApplicationRecord
     feature.update_attributes(value: value, enabled: true)
   end
 
+  def get_logo
+    if params[:id]
+      return params[:id]
+    else
+      return 'default'
+    end
+  end
+
   # Returns the value if enabled or the default if not enabled
   def get_value(name)
     # Return feature value if already exists
@@ -47,14 +55,7 @@ class Setting < ApplicationRecord
     # return default value
     case name
     when "Branding Image"
-      org_css = 'default'
-      if org_css == 'claro'
-        Rails.configuration.branding_image_claro
-      elsif org_css == 'go'
-        Rails.configuration.branding_image_gobernacion
-      else org_css == 'default'
-        Rails.configuration.branding_image_default
-      end
+      Rails.configuration.branding_image_default
     when "Primary Color"
       Rails.configuration.primary_color_default
     when "Registration Method"

@@ -95,18 +95,17 @@
             </div>
           </div>
         <% else %>
-          <% application.original_url %>
           <% allow_greenlight_accounts = allow_greenlight_accounts? %>
           <% if allow_greenlight_accounts %>
-            <%= link_to t("login"), signin_path + '?t=' + $load_css.to_s, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
+            <%= link_to t("login"), signin_path, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
           <% elsif Rails.configuration.loadbalanced_configuration %>
             <%= link_to t("login"), omniauth_login_url(:bn_launcher), :class => "btn btn-outline-primary mx-2 sign-in-button" %>
           <% else %>
-            <%= link_to t("login"), signin_path + '?t=' + $load_css.to_s, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
+            <%= link_to t("login"), signin_path, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
           <% end %>
 
           <% if allow_user_signup? && allow_greenlight_accounts %>
-            <%= link_to t("signup.title"), signup_path + '?t=' + $load_css.to_s, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
+            <%= link_to t("signup.title"), signup_path, :class => "btn btn-outline-primary mx-2 sign-in-button" %>
           <% end %>
         <% end %>
       </div>
