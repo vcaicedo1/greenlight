@@ -154,7 +154,7 @@ class RoomsController < ApplicationController
   # POST /:room_uid/start
   def start
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
-    logger.info "Support: #{current_user.has_role} is starting room #{@room.uid}"
+    logger.info "Test: #{current_user.has_role} is starting room #{@room.uid}"
 
     # Join the user in and start the meeting.
     opts = default_meeting_options
@@ -164,7 +164,7 @@ class RoomsController < ApplicationController
     room_settings = JSON.parse(@room[:room_settings])
     opts[:mute_on_start] = room_settings["muteOnStart"]
     opts[:require_moderator_approval] = room_settings["requireModeratorApproval"]
-
+    logger.info "Total: #{default_meeting_options}"
     begin
       redirect_to join_path(@room, current_user.name, opts, current_user.uid)
     rescue BigBlueButton::BigBlueButtonException => e
