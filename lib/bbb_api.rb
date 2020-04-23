@@ -3,9 +3,12 @@
 module BbbApi
   RETURNCODE_SUCCESS = "SUCCESS"
 
-  def bbb_endpoint
-    logger.info "Cargar dominio"
-    Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.68/bigbluebutton/api/"
+  def bbb_endpoint(user_role)
+    if user_role == "claro"
+      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.68/bigbluebutton/api/"
+    elsif user_role == "gobernacion"
+      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.69/bigbluebutton/api/"
+    end
   end
 
   def bbb_secret
@@ -14,12 +17,13 @@ module BbbApi
 
   # Sets a BigBlueButtonApi object for interacting with the API.
   def bbb(user_provider)
+    logger.info user_provider
     if Rails.configuration.loadbalanced_configuration
       user_domain = retrieve_provider_info(user_provider)
 
       BigBlueButton::BigBlueButtonApi.new(remove_slash(user_domain["apiURL"]), user_domain["secret"], "0.8")
     else
-      BigBlueButton::BigBlueButtonApi.new(remove_slash(bbb_endpoint), bbb_secret, "0.8")
+      BigBlueButton::BigBlueButtonApi.new(remove_slash(bbb_endpoint("default")), bbb_secret, "0.8")
     end
   end
 
