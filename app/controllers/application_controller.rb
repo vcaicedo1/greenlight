@@ -41,7 +41,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def bbb_server
-    logger.info "Testeo:#{current_user&.has_role?(:admin)}"
+    logger.info "Testeo1:#{current_user&.has_role?(:admin)}"
+    logger.info "Testeo2:#{current_user&.has_role?(:admin)}"
+    logger.info "Testeo3:#{current_user&.has_role}"
+    logger.info "Testeo4:#{User.username}"
     @bbb_server ||= Rails.configuration.loadbalanced_configuration ? bbb(@user_domain) : bbb("greenlight")
   end
 
