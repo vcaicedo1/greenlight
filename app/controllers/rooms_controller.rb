@@ -297,6 +297,7 @@ class RoomsController < ApplicationController
 
   # Find the room from the uid.
   def find_room
+    puts("Test: 1")
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
 
