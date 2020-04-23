@@ -163,7 +163,7 @@ module Greenlight
 
     def original_url
       base_url + original_fullpath
-      @load_css = 'gobernacion'
+      $load_css = 'gobernacion'
     end
   end
 end
