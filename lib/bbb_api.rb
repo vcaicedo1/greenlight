@@ -13,18 +13,24 @@ module BbbApi
     end
   end
 
-  def bbb_secret
-    Rails.configuration.bigbluebutton_secret
+  def bbb_secret(user_role)
+    if user_role == "claro"
+      Rails.configuration.bigbluebutton_secret
+    elsif user_role == "gobernacion"
+      Rails.configuration.bigbluebutton_secret
+    else
+      Rails.configuration.bigbluebutton_secret
+    end
   end
 
   # Sets a BigBlueButtonApi object for interacting with the API.
-  def bbb(user_provider)
+  def bbb(user_provider, apt_domain_name)
     if Rails.configuration.loadbalanced_configuration
       user_domain = retrieve_provider_info(user_provider)
 
       BigBlueButton::BigBlueButtonApi.new(remove_slash(user_domain["apiURL"]), user_domain["secret"], "0.8")
     else
-      BigBlueButton::BigBlueButtonApi.new(remove_slash(bbb_endpoint("default")), bbb_secret, "0.8")
+      BigBlueButton::BigBlueButtonApi.new(remove_slash(bbb_endpoint(apt_domain_name)), bbb_secret(apt_domain_name), "0.8")
     end
   end
 
