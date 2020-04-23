@@ -4,11 +4,15 @@ module BbbApi
   RETURNCODE_SUCCESS = "SUCCESS"
 
   def bbb_endpoint(user_role)
+    logger.info "Dominio: #{user_role}"
     if user_role == "claro"
+      logger.info "Paso1"
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.68/bigbluebutton/api/"
     elsif user_role == "gobernacion"
+      logger.info "Paso2"
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.69/bigbluebutton/api/"
     else
+      logger.info "Paso3: #{Rails.configuration.bigbluebutton_endpoint}"
       Rails.configuration.bigbluebutton_endpoint
     end
   end
