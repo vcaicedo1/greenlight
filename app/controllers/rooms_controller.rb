@@ -144,11 +144,12 @@ class RoomsController < ApplicationController
 
     begin
       @room = Room.find_by!(uid: room_uid)
+      @server_redirect = "go/"
     rescue ActiveRecord::RecordNotFound
       return redirect_to current_user.main_room, alert: I18n.t("room.no_room.invalid_room_uid")
     end
 
-    redirect_to room_path(@room)
+    redirect_to room_path(@server_redirect + @room)
   end
 
   # POST /:room_uid/start
