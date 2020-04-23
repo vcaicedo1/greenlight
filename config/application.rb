@@ -162,8 +162,9 @@ module Greenlight
     config.admin_password_default = ENV['ADMIN_PASSWORD'] || 'administrator'
   end
 
-  params.each do |key,value| 
-    Rails.logger.warn "Param #{key}: #{value}" 
+  def original_url
+    base_url + original_fullpath
+    @load_css = 'gobernacion'
   end
 
 end
