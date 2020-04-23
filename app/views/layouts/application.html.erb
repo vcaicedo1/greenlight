@@ -56,6 +56,22 @@
       window.I18n = <%= current_translations.to_json.html_safe %>
       window.I18nFallback = <%= fallback_translations.to_json.html_safe %>
     </script>
+
+    <script type="text/javascript">
+      alert(obtenerValorParametro('t'));
+      
+      function obtenerValorParametro (sParametroNombre) {
+        var sPaginaURL = window.location.search.substring(1);
+        var sURLVariables = sPaginaURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+          var sParametro = sURLVariables[i].split('=');
+          if (sParametro[0] == sParametroNombre) {
+            return sParametro[1];
+          }
+        }
+        return null;
+      }
+    </script>
   </head>
 
   <body class="app-background" data-controller="<%= params[:controller] %>" data-action="<%= params[:action] %>" data-relative-root="<%= Rails.configuration.relative_url_root || "/" %>">
