@@ -160,11 +160,10 @@ module Greenlight
 
     # Default admin password
     config.admin_password_default = ENV['ADMIN_PASSWORD'] || 'administrator'
-  end
 
-  def original_url
-    base_url + original_fullpath
-    @load_css = 'gobernacion'
+    def original_url
+      base_url + original_fullpath
+      @load_css = 'gobernacion'
+    end
   end
-
 end
