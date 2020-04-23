@@ -4,6 +4,7 @@ module BbbApi
   RETURNCODE_SUCCESS = "SUCCESS"
 
   def bbb_endpoint
+    logger.info "Por aqui paso 2"
     Rails.configuration.bigbluebutton_endpoint
   end
 
@@ -15,6 +16,7 @@ module BbbApi
   def bbb(user_provider)
     logger.info "Por aqui paso"
     if Rails.configuration.loadbalanced_configuration
+      logger.info "Por aqui paso y entro"
       user_domain = retrieve_provider_info(user_provider)
 
       BigBlueButton::BigBlueButtonApi.new(remove_slash(user_domain["apiURL"]), user_domain["secret"], "0.8")
