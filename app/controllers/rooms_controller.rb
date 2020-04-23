@@ -302,8 +302,9 @@ class RoomsController < ApplicationController
     logger.info @room.to_s
     @testttttt = User.includes(:roles, :main_room).find_by(id: session[:user_id])
     logger.info @testttttt.to_s
-    role_s = User.highest_priority_role
-    logger.info role_s
+    @current_userrrrrrrrr = User.includes(:roles, :main_room).find_by(id: session[:user_id])
+    logger.info @current_userrrrrrrrr.name
+    logger.info "-----------------------------------"
   end
 
   # Ensure the user either owns the room or is an admin of the room owner or the room is shared with him
