@@ -5,10 +5,7 @@ module BbbApi
 
   def bbb_endpoint
     logger.info "Cargar dominio"
-    Rails.configuration.bigbluebutton_endpoint
-    logger.info "Dominio 1:#{Rails.configuration.bigbluebutton_endpoint}"
     Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.68/bigbluebutton/api/"
-    logger.info "Dominio 2:#{Rails.configuration.bigbluebutton_endpoint}"
   end
 
   def bbb_secret
