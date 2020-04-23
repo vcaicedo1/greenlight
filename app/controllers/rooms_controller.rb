@@ -299,6 +299,9 @@ class RoomsController < ApplicationController
   def find_room
     logger.info "Test: 1"
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
+    logger.info @room.to_s
+    @testttttt = User.includes(:roles, :main_room).find_by(id: session[:user_id])
+    logger.info @testttttt.to_s
   end
 
   # Ensure the user either owns the room or is an admin of the room owner or the room is shared with him
