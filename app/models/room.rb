@@ -61,11 +61,9 @@ class Room < ApplicationRecord
     user_id == user&.id
   end
 
-  def role_by_owned
+  def user_by_owned
     logger.info "UsuarioId : #{user_id}"
-    user_room = User.where(id: user_id)
-    logger.info "Test:::::: : #{user_room}"
-    logger.info "Test:::::: : #{user_room.roles}"
+    @user_room ||= User.includes(:roles, :main_room).find_by(id: user_id)
   end
 
   def shared_users
