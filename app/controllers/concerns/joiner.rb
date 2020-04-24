@@ -49,9 +49,9 @@ module Joiner
 
   def join_room(opts)
     room_settings = JSON.parse(@room[:room_settings])
-
+    logger.info "Paso a paso 1"
     if room_running?(@room.bbb_id) || @room.owned_by?(current_user) || room_settings["anyoneCanStart"]
-
+      logger.info "Paso a paso 2"
       # Determine if the user needs to join as a moderator.
       opts[:user_is_moderator] = @room.owned_by?(current_user) || room_settings["joinModerator"] || @shared_room
 
@@ -65,6 +65,7 @@ module Joiner
         redirect_to join_path(@room, join_name, opts)
       end
     else
+      logger.info "Paso a paso 3"
       search_params = params[@room.invite_path] || params
       @search, @order_column, @order_direction, pub_recs =
         public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
