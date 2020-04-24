@@ -6,22 +6,19 @@ module BbbApi
   def bbb_endpoint(user_role)
     logger.info "Dominio: #{user_role}"
     if user_role == "claro"
-      logger.info "Paso1"
-      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.68/bigbluebutton/api/"
-    elsif user_role == "gobernacion"
-      logger.info "Paso2"
-      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.69/bigbluebutton/api/"
+      Rails.configuration.bigbluebutton_endpoint = "https://app.aulaparatodos.com/bigbluebutton/api/"
+    elsif user_role == "gobval"
+      Rails.configuration.bigbluebutton_endpoint = "https://co02ocs.aulaparatodos.com/bigbluebutton/api/"
     else
-      logger.info "Paso3: #{Rails.configuration.bigbluebutton_endpoint}"
-      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.67/bigbluebutton/api/"
+      Rails.configuration.bigbluebutton_endpoint = "https://co01ocr.aulaparatodos.com/bigbluebutton/api/"
     end
   end
 
   def bbb_secret(user_role)
     if user_role == "claro"
-      Rails.configuration.bigbluebutton_secret
-    elsif user_role == "gobernacion"
-      Rails.configuration.bigbluebutton_secret
+      Rails.configuration.bigbluebutton_secret_claro
+    elsif user_role == "gobval"
+      Rails.configuration.bigbluebutton_secret_gobval
     else
       Rails.configuration.bigbluebutton_secret
     end

@@ -223,8 +223,8 @@ class User < ApplicationRecord
     false
   end
 
+  # Validar si la ultima parte del nombre del rol coincide con el parametro
   def has_role_org?(role)
-    # rubocop:enable Naming/PredicateName
     roles.each do |single_role|
       return true if single_role.name.end_with?(role.to_s)
     end

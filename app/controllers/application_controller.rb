@@ -49,10 +49,10 @@ class ApplicationController < ActionController::Base
   def apt_domain
     if current_user&.has_role_org?(:_claro)
       apt_domain_name = "claro"
-    elsif current_user&.has_role_org?(:_gobv)
-      apt_domain_name = "gobv"
+    elsif current_user&.has_role_org?(:_gobval)
+      apt_domain_name = "gobval"
     else
-      apt_domain_name = "default"
+      apt_domain_name = "apt"
     end
   end
 
