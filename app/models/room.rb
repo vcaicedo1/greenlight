@@ -58,8 +58,13 @@ class Room < ApplicationRecord
 
   # Determines if a user owns a room.
   def owned_by?(user)
-    logger.info "UsuarioId : #{user_id}"
     user_id == user&.id
+  end
+
+  def role_by_owned
+    logger.info "UsuarioId : #{user_id}"
+    user_room = User.where(id: user_id)
+    logger.info "Test:::::: : #{user_room.highest_priority_role}"
   end
 
   def shared_users
