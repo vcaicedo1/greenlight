@@ -53,6 +53,9 @@ module Joiner
     logger.info "D1: #{@room.bbb_id}"
     logger.info "D2: #{@room.owned_by?(current_user)}"
     logger.info "D3: #{room_settings["anyoneCanStart"]}"
+
+    @room.role_by_owned
+    
     if room_running?(@room.bbb_id) || @room.owned_by?(current_user) || room_settings["anyoneCanStart"]
       logger.info "Paso a paso 2"
       # Determine if the user needs to join as a moderator.
