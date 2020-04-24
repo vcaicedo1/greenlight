@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def bbb_server
-    apt_domain_name = apt_domain(null)
+    apt_domain_name = apt_domain(false)
     logger.info "Dominio del rol de usuario: #{apt_domain_name}"
     @bbb_server ||= Rails.configuration.loadbalanced_configuration ? bbb(@user_domain, apt_domain_name) : bbb("greenlight", apt_domain_name)
   end
