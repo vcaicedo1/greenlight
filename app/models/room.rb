@@ -64,7 +64,8 @@ class Room < ApplicationRecord
   def role_by_owned
     logger.info "UsuarioId : #{user_id}"
     user_room = User.where(id: user_id)
-    logger.info "Test:::::: : #{user_room.highest_priority_role}"
+    logger.info "Test:::::: : #{user_room}"
+    logger.info "Test:::::: : #{user_room.role_ids}"
   end
 
   def shared_users
