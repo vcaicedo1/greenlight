@@ -54,7 +54,7 @@ module Joiner
     logger.info "D2: #{@room.owned_by?(current_user)}"
     logger.info "D3: #{room_settings["anyoneCanStart"]}"
 
-    logger.info "D4: #{@room.user_by_owned&.has_role_org?(:_claro)}"
+    logger.info "D4: #{@room.user_by_owned&.highest_priority_role}"
 
     if room_running?(@room.bbb_id) || @room.owned_by?(current_user) || room_settings["anyoneCanStart"]
       logger.info "Paso a paso 2"
