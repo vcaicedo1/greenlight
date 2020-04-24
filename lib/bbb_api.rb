@@ -6,10 +6,13 @@ module BbbApi
   def bbb_endpoint(user_role)
     logger.info "Dominio: #{user_role}"
     if user_role == "claro"
-      Rails.configuration.bigbluebutton_endpoint = "https://192.168.1.67/bigbluebutton/api/"
+      logger.info "API:CLARO"
+      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.67/bigbluebutton/api/"
     elsif user_role == "gobval"
+      logger.info "API:GOBERNACION"
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.67/bigbluebutton/api/"
     else
+      logger.info "API:APT"
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.67/bigbluebutton/api/"
     end
   end
