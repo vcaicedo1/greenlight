@@ -63,6 +63,18 @@ module Greenlight
       config.bigbluebutton_secret_default
     end
 
+    config.bigbluebutton_secret_claro = if ENV["BIGBLUEBUTTON_SECRET_CLARO"].present?
+      ENV["BIGBLUEBUTTON_SECRET_CLARO"]
+    else
+      config.bigbluebutton_secret_default
+    end
+
+    config.bigbluebutton_secret_gobval = if ENV["BIGBLUEBUTTON_SECRET_GOBVAL"].present?
+      ENV["BIGBLUEBUTTON_SECRET_GOBVAL"]
+    else
+      config.bigbluebutton_secret_default
+    end
+
     # Fix endpoint format if required.
     config.bigbluebutton_endpoint += "/" unless config.bigbluebutton_endpoint.ends_with?('/')
     config.bigbluebutton_endpoint += "api/" if config.bigbluebutton_endpoint.ends_with?('bigbluebutton/')
@@ -131,8 +143,6 @@ module Greenlight
 
     # Default branding image if the user does not specify one
     config.branding_image_default = "https://app.aulaparatodos.com/images/logo_with_text.png"
-    config.branding_image_claro = "http://192.168.1.67/images/logo_with_text_claro.png"
-    config.branding_image_gobernacion = "http://192.168.1.67/images/logo_with_text_gobernacion.png"
 
     # Default primary color if the user does not specify one
     config.primary_color_default = "#467fcf"
