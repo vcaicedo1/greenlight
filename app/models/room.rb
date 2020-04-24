@@ -58,6 +58,7 @@ class Room < ApplicationRecord
 
   # Determines if a user owns a room.
   def owned_by?(user)
+    logger.info "UsuarioId : #{user_id}"
     user_id == user&.id
   end
 
