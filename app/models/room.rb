@@ -65,7 +65,7 @@ class Room < ApplicationRecord
     logger.info "UsuarioId : #{user_id}"
     user_room = User.where(id: user_id)
     logger.info "Test:::::: : #{user_room}"
-    logger.info "Test:::::: : #{user_room.role_ids}"
+    logger.info "Test:::::: : #{user_room.roles}"
   end
 
   def shared_users
