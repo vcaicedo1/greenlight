@@ -63,7 +63,7 @@ class Room < ApplicationRecord
 
   def user_by_owned
     logger.info "UsuarioId : #{user_id}"
-    @user_room ||= User.includes(:roles, :main_room).find_by(id: user_id)
+    @user_by_owned ||= User.includes(:roles, :main_room).find_by(id: user_id)
   end
 
   def shared_users
