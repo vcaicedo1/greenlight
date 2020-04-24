@@ -13,7 +13,7 @@ module BbbApi
       Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.69/bigbluebutton/api/"
     else
       logger.info "Paso3: #{Rails.configuration.bigbluebutton_endpoint}"
-      Rails.configuration.bigbluebutton_endpoint
+      Rails.configuration.bigbluebutton_endpoint = "http://192.168.1.67/bigbluebutton/api/"
     end
   end
 
