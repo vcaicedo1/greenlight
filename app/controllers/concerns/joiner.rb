@@ -63,7 +63,7 @@ module Joiner
         logger.info "Paso 3"
         redirect_to join_path_by_role(role_user_room, @room, current_user.name, opts, current_user.uid)
       else
-        logger.info "Paso "
+        logger.info "Paso 4"
         join_name = params[:join_name] || params[@room.invite_path][:join_name]
         redirect_to join_path_by_role(role_user_room, @room, join_name, opts)
       end
