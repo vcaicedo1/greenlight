@@ -94,7 +94,7 @@ module BbbServer
       "meta_bbb-origin": "Greenlight",
       "meta_bbb-origin-server-name": options[:host]
     }
-    logger.info "P1"
+
     create_options[:guestPolicy] = "ASK_MODERATOR" if options[:require_moderator_approval]
 
     # Send the create request.
@@ -104,7 +104,6 @@ module BbbServer
       unless meeting[:messageKey] == 'duplicateWarning'
        room.update_attributes(sessions: room.sessions + 1,
           last_session: DateTime.now, active: true)
-       logger.info "Pasandooooooooooo"
       end
     rescue BigBlueButton::BigBlueButtonException => e
       puts "BigBlueButton failed on create: #{e.key}: #{e.message}"
