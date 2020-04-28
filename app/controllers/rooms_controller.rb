@@ -160,7 +160,9 @@ class RoomsController < ApplicationController
     current_user.ordered_rooms_active.each do |room|
       logger.info "Sala activa: #{room.id}"
       active_room_name = room.name
-      active_rooms += 1
+      if @room.uid != room.id
+        active_rooms += 1
+      end      
     end
 
     if active_rooms > 0

@@ -163,7 +163,7 @@ en:
   add_to_google_calendar: "Add to Google Calendar"
   bigbluebutton: AulaParaTodos
   bigbluebutton_exception: Oops, there was an error when starting the meeting!
-  bigbluebutton_exception_active_room: You already have an active session in room% {room_name}. You must "End Session" in that room to start a different one.
+  bigbluebutton_exception_active_room: You already have an active session in room% <br>{room_name}</br>. You must <br>End Session</br> in that room to start a different one.
   cancel: Cancel
   cookies:
     cookie_info: Cookies help us deliver our services. By using our services, you agree to our use of cookies.
