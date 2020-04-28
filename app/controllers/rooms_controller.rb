@@ -155,6 +155,9 @@ class RoomsController < ApplicationController
   def start
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
 
+    current_user.ordered_rooms_actives.each do |room|
+    logger.info "Sala: #{room.id}"
+
     # Join the user in and start the meeting.
     opts = default_meeting_options
     opts[:user_is_moderator] = true

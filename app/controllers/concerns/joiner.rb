@@ -52,7 +52,7 @@ module Joiner
     role_user_room = @room.user_by_owned&.highest_priority_role.name
 
     if room_running_by_role?(@room.bbb_id, role_user_room) || @room.owned_by?(current_user) || room_settings["anyoneCanStart"]
-      logger.info "Paso 1"
+
       # Determine if the user needs to join as a moderator.
       opts[:user_is_moderator] = @room.owned_by?(current_user) || room_settings["joinModerator"] || @shared_room
 
@@ -60,15 +60,12 @@ module Joiner
       opts[:mute_on_start] = room_settings["muteOnStart"]
 
       if current_user
-        logger.info "Paso 3"
         redirect_to join_path_by_role(role_user_room, @room, current_user.name, opts, current_user.uid)
       else
-        logger.info "Paso 4"
         join_name = params[:join_name] || params[@room.invite_path][:join_name]
         redirect_to join_path_by_role(role_user_room, @room, join_name, opts)
       end
     else
-      logger.info "Paso 2"
       search_params = params[@room.invite_path] || params
       @search, @order_column, @order_direction, pub_recs =
         public_recordings(@room.bbb_id, search_params.permit(:search, :column, :direction), true)
