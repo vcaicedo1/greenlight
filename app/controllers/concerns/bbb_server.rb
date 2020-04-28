@@ -99,11 +99,13 @@ module BbbServer
 
     # Send the create request.
     begin
+      logger.info "Pasando por validacion 1"
       meeting = bbb_server.create_meeting(room.name, room.bbb_id, create_options)
       # Update session info.
+      logger.info "Pasando por validacion 2 #{meeting[:messageKey]}"
       unless meeting[:messageKey] == 'duplicateWarning'
-       room.update_attributes(sessions: room.sessions + 1,
-          last_session: DateTime.now, active: true)
+        logger.info "Pasando por validacion 3"
+        room.update_attributes(sessions: room.sessions + 1, last_session: DateTime.now, active: true)
       end
     rescue BigBlueButton::BigBlueButtonException => e
       puts "BigBlueButton failed on create: #{e.key}: #{e.message}"
