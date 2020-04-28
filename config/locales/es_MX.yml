@@ -163,7 +163,7 @@ es_MX:
   add_to_google_calendar: "Agregar a calendario de Google"
   bigbluebutton: AulaParaTodos
   bigbluebutton_exception: Oh no! Ocurrió un error al iniciar la sesión.
-  bigbluebutton_exception_active_room: Usted ya tiene una sesión activa en la sala <br>%{room_name}</br>. Debe <br>Finalizar sesión</br> en esa sala para iniciar en una diferente.
+  bigbluebutton_exception_active_room: Usted ya tiene una sesión activa en la sala <strong>%{room_name}</strong>. Debe <strong>Finalizar sesión</strong> en esa sala para iniciar en una diferente.
   cancel: Cancelar
   cookies:
     cookie_info: "Las cookies nos ayudan a proveer nuestros servicios. Al utilizar nuestros servicios, usted acepta nuestro uso de cookies."
