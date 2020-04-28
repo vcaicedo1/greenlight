@@ -158,9 +158,9 @@ class RoomsController < ApplicationController
     active_rooms = 0
     active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
-      logger.info "Sala activa: #{room.id}"
+      logger.info "Sala activa: #{room.id} #{@room.uid} #{@room.id}"
       active_room_name = room.name
-      if @room.uid != room.id
+      if @room.id != room.id
         active_rooms += 1
       end      
     end
