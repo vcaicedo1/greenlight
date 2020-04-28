@@ -156,7 +156,8 @@ class RoomsController < ApplicationController
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
 
     current_user.ordered_rooms_actives.each do |room|
-    logger.info "Sala: #{room.id}"
+      logger.info "Sala: #{room.id}"
+    end
 
     # Join the user in and start the meeting.
     opts = default_meeting_options
