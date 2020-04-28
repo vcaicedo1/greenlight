@@ -278,8 +278,13 @@ class RoomsController < ApplicationController
     logger.info "Support: #{current_user.present? ? current_user.email : 'Guest'} has left room #{@room.uid}"
 
     if current_user.present? ? @room.owned_by?(current_user) : false
-      logger.info "Esta saliendo el dueño de la sala"
-      @room.update_attributes(end_last_session: DateTime.now, active: false)
+      role_user_room = @room.user_by_owned&.highest_priority_role.name
+      if room_running_by_role?(@room.bbb_id, role_user_room)
+        logger.info "Esta saliendo el dueño de la sala"
+      else
+        logger.info "Esta finalizando sesion el dueño de la sala"
+        @room.update_attributes(end_last_session: DateTime.now, active: false)
+      end     
     end
 
     # Redirect the correct page.
