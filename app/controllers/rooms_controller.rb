@@ -155,30 +155,39 @@ class RoomsController < ApplicationController
   def start
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
 
+    active_rooms = 0
+    active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
-      logger.info "Sala: #{room.id}"
+      logger.info "Sala activa: #{room.id}"
+      active_room_name = room.name
+      active_rooms += 1
     end
 
-    # Join the user in and start the meeting.
-    opts = default_meeting_options
-    opts[:user_is_moderator] = true
+    if active_rooms > 0
+      logger.info("Support: #{@room.uid} not start")
+      redirect_to room_path, alert: I18n.t("bigbluebutton_exception_active_room", room_name: active_room_name)
+    else
+      # Join the user in and start the meeting.
+      opts = default_meeting_options
+      opts[:user_is_moderator] = true
 
-    # Include the user's choices for the room settings
-    room_settings = JSON.parse(@room[:room_settings])
-    opts[:mute_on_start] = room_settings["muteOnStart"]
-    opts[:require_moderator_approval] = room_settings["requireModeratorApproval"]
+      # Include the user's choices for the room settings
+      room_settings = JSON.parse(@room[:room_settings])
+      opts[:mute_on_start] = room_settings["muteOnStart"]
+      opts[:require_moderator_approval] = room_settings["requireModeratorApproval"]
 
-    begin
-      redirect_to join_path(@room, current_user.name, opts, current_user.uid)
-    rescue BigBlueButton::BigBlueButtonException => e
-      logger.error("Support: #{@room.uid} start failed: #{e}")
+      begin
+        redirect_to join_path(@room, current_user.name, opts, current_user.uid)
+      rescue BigBlueButton::BigBlueButtonException => e
+        logger.error("Support: #{@room.uid} start failed: #{e}")
 
-      redirect_to room_path, alert: I18n.t(e.key.to_s.underscore, default: I18n.t("bigbluebutton_exception"))
+        redirect_to room_path, alert: I18n.t(e.key.to_s.underscore, default: I18n.t("bigbluebutton_exception"))
+      end
+
+      # Notify users that the room has started.
+      # Delay 5 seconds to allow for server start, although the request will retry until it succeeds.
+      NotifyUserWaitingJob.set(wait: 5.seconds).perform_later(@room)
     end
-
-    # Notify users that the room has started.
-    # Delay 5 seconds to allow for server start, although the request will retry until it succeeds.
-    NotifyUserWaitingJob.set(wait: 5.seconds).perform_later(@room)
   end
 
   # POST /:room_uid/update_settings
