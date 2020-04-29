@@ -139,7 +139,6 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
   end
 
   create_table "session_history", force: :cascade do |t|
-    t.integer "id", null: false
     t.integer "room_id"
     t.integer "user_id"
     t.datetime "start_session"
