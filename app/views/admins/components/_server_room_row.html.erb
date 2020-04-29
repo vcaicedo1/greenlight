@@ -24,7 +24,7 @@
       </text>
     </div>
     <div class="small text-muted">
-      <%= [t("administrator.users.table.last_session"), ": ", Date.getTimezoneOffset(room.last_session)].join %>
+      <%= [t("administrator.users.table.last_session"), ": ", Time.find_zone("Bogota").parse(room.last_session)].join %>
     </div>
   </td>
   <td class="text-left">
