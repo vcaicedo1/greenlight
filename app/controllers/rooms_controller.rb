@@ -284,6 +284,7 @@ class RoomsController < ApplicationController
       else
         logger.info "Esta finalizando sesion el dueño de la sala"
         @room.update_attributes(end_last_session: DateTime.now, active: false)
+        @session_history.update_attributes(end_session: DateTime.now)
       end     
     end
 
