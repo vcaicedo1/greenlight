@@ -136,7 +136,11 @@ module BbbServer
   end
 
   # Obtener el numero total de participantes en etsa sala
-  def participants_count(bbb_id)
-    bbb_server.get_meeting_info(meetingID: bbb_id, attendeePW: @room.attendee_pw)
+  def participants_count(bbb_id, room)
+
+    # Determine the password to use when joining.
+    password = options[:user_is_moderator] ? room.moderator_pw : room.attendee_pw
+
+    bbb_server.get_meeting_info(bbb_id, password)
   end
 end

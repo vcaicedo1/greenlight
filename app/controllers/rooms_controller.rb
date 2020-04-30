@@ -288,7 +288,7 @@ class RoomsController < ApplicationController
         @session_history = SessionHistory.most_recent_for(current_user.id, @room.id)
         @session_history.update_attributes(end_session: DateTime.now)
 
-        participants = participants_count(@room.bbb_id)
+        participants = participants_count(@room.bbb_id, @room)
         logger.info "Total: #{participants}"
       end     
     end
