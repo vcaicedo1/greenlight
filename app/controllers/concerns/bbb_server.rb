@@ -137,6 +137,6 @@ module BbbServer
 
   # Obtener el numero total de participantes en etsa sala
   def participants_count(bbb_id)
-    bbb_server.get_meeting_info(meetingID: bbb_id)
+    bbb_server.get_meeting_info(meetingID: bbb_id, attendeePW: @room.attendee_pw)
   end
 end
