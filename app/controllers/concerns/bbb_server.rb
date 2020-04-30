@@ -104,8 +104,7 @@ module BbbServer
       unless meeting[:messageKey] == 'duplicateWarning'
         room.update_attributes(sessions: room.sessions + 1, last_session: DateTime.now, active: true)
         
-        @session_history = SessionHistory.new(room_id: room.id, user_id: room.user_id, start_session: DateTime.now)
-        @session_history.save
+        @session_history.update_attributes(start_session: DateTime.now)
 
       end
     rescue BigBlueButton::BigBlueButtonException => e

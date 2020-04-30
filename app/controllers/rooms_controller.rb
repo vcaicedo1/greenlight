@@ -94,6 +94,8 @@ class RoomsController < ApplicationController
       flash: { alert: I18n.t("administrator.site_settings.authentication.user-info") } if auth_required
 
     @shared_room = room_shared_with_user
+    @session_history = SessionHistory.new(room_id: room.id, user_id: room.user_id)
+    @session_history.save
 
     unless @room.owned_by?(current_user) || @shared_room
       # Don't allow users to join unless they have a valid access code or the room doesn't have an access code
