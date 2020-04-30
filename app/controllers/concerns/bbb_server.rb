@@ -134,4 +134,9 @@ module BbbServer
     record_ids = bbb_server.get_recordings(meetingID: bbb_id)[:recordings].pluck(:recordID)
     bbb_server.delete_recordings(record_ids) unless record_ids.empty?
   end
+
+  # Obtener el numero total de participantes en etsa sala
+  def participants_count(bbb_id)
+    bbb_server.get_meeting_info(meetingID: bbb_id)[:participantCount]
+  end
 end
