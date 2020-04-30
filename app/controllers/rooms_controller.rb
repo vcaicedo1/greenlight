@@ -94,8 +94,6 @@ class RoomsController < ApplicationController
       flash: { alert: I18n.t("administrator.site_settings.authentication.user-info") } if auth_required
 
     @shared_room = room_shared_with_user
-    @session_history = SessionHistory.new(room_id: room.id, user_id: room.user_id)
-    @session_history.save
 
     unless @room.owned_by?(current_user) || @shared_room
       # Don't allow users to join unless they have a valid access code or the room doesn't have an access code
@@ -286,7 +284,9 @@ class RoomsController < ApplicationController
       else
         logger.info "Esta finalizando sesion el dueño de la sala"
         @room.update_attributes(end_last_session: DateTime.now, active: false)
-        @session_history.update_attributes(end_session: DateTime.now)
+
+        @conversations = SessionHistory.most_recent_for(current_user.id, @room.id)
+        @conversations.update_attributes(end_session: DateTime.now)
       end     
     end
 
