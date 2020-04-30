@@ -285,8 +285,8 @@ class RoomsController < ApplicationController
         logger.info "Esta finalizando sesion el dueño de la sala"
         @room.update_attributes(end_last_session: DateTime.now, active: false)
 
-        @conversations = SessionHistory.most_recent_for(current_user.id, @room.id)
-        @conversations.update_attributes(end_session: DateTime.now)
+        @session_history = SessionHistory.most_recent_for(current_user.id, @room.id)
+        @session_history.update_attributes(end_session: DateTime.now)
 
         participants = participants_count(@room.bbb_id)
         logger.info "Total: #{participants}"
