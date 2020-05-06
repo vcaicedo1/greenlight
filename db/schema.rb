@@ -148,4 +148,44 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
     t.index ["user_id"], name: "index_session_histories_on_user_id"
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.integer "reseller_id"
+    t.string "name"
+    t.string "legalid"
+    t.string "address"
+    t.string "phone"
+    t.string "email"
+    t.integer "country_id"
+    t.integer "state_id"
+    t.integer "city_id"
+    t.string "imagelogo"
+    t.boolean "email_verified", default: false
+    t.string "responsible"
+    t.string "serverslist", default: "{ }"
+    t.string "settings", default: "{ }"
+    t.integer "maxusers", null: false
+    t.datetime "nextinvoice", null: false
+    t.boolean "enabled", default: false  
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resellers", force: :cascade do |t|
+    t.string "name"
+    t.string "legalid"
+    t.string "address"
+    t.string "phone"
+    t.string "email"
+    t.string "responsible"
+    t.string "serverslist", default: "{ }"
+    t.string "imagelogo"
+    t.integer "country_id"
+    t.integer "state_id"
+    t.integer "city_id"
+    t.boolean "email_verified", default: false
+    t.boolean "enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
