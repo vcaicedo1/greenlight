@@ -109,7 +109,7 @@ class User < ApplicationRecord
     [main_room] + rooms.where.not(id: main_room.id).order(Arel.sql("last_session IS NULL, last_session desc"))
   end
 
-  # Retorna una lista de sala por ultima sesion que se encuentren activas
+    # Retorna una lista de sala por ultima sesion que se encuentren activas
   def ordered_rooms_active
     rooms.where(active: true).order(Arel.sql("last_session IS NULL, last_session desc"))
   end
@@ -230,9 +230,9 @@ class User < ApplicationRecord
   end
 
   # Validar si la ultima parte del nombre del rol coincide con el parametro
-  def has_role_org?(end_role)
+  def has_role_org?(end_name_role)
     roles.each do |single_role|
-      return true if single_role.name.end_with?(end_role.to_s)
+      return true if single_role.name.end_with?(end_name_role.to_s)
     end
 
     false

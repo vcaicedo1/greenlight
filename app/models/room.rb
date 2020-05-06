@@ -62,8 +62,8 @@ class Room < ApplicationRecord
     user_id == user&.id
   end
 
+  # Cargar a un usuario sus roles
   def user_by_owned
-    logger.info "UsuarioId : #{user_id}"
     @user_by_owned ||= User.includes(:roles, :main_room).find_by(id: user_id)
   end
 

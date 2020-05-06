@@ -1,3 +1,4 @@
+ 
 # frozen_string_literal: true
 
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
@@ -29,14 +30,14 @@ module BbbServer
     bbb_server.is_meeting_running?(bbb_id)
   end
 
-  def room_running_by_role?(bbb_id, role_user_room)
-    bbb_server_by_role(role_user_room).is_meeting_running?(bbb_id)
-  end
-
   # Returns a list of all running meetings
   def all_running_meetings
     bbb_server.get_meetings
   end
+
+  # def room_running_by_role?(bbb_id, role_user_room)
+  #   bbb_server_by_role(role_user_room).is_meeting_running?(bbb_id)
+  # end
 
   def get_recordings(meeting_id)
     bbb_server.get_recordings(meetingID: meeting_id)
@@ -63,22 +64,22 @@ module BbbServer
     bbb_server.join_meeting_url(room.bbb_id, name, password, join_opts)
   end
 
-  # Returns a URL to join a user into a meeting.
-  def join_path_by_role(role_user_room, room, name, options = {}, uid = nil)
-    # Create the meeting, even if it's running
-    start_session(room, options)
+  # Devuelve una URL para unirse a una usuario en una reunión por medio del rol del propietario de la sala
+  # def join_path_by_role(role_user_room, room, name, options = {}, uid = nil)
+  #   # Create the meeting, even if it's running
+  #   start_session(room, options)
 
-    # Determine the password to use when joining.
-    password = options[:user_is_moderator] ? room.moderator_pw : room.attendee_pw
+  #   # Determine the password to use when joining.
+  #   password = options[:user_is_moderator] ? room.moderator_pw : room.attendee_pw
 
-    # Generate the join URL.
-    join_opts = {}
-    join_opts[:userID] = uid if uid
-    join_opts[:join_via_html5] = true
-    join_opts[:guest] = true if options[:require_moderator_approval] && !options[:user_is_moderator]
+  #   # Generate the join URL.
+  #   join_opts = {}
+  #   join_opts[:userID] = uid if uid
+  #   join_opts[:join_via_html5] = true
+  #   join_opts[:guest] = true if options[:require_moderator_approval] && !options[:user_is_moderator]
 
-    bbb_server_by_role(role_user_room).join_meeting_url(room.bbb_id, name, password, join_opts)
-  end
+  #   bbb_server_by_role(role_user_room).join_meeting_url(room.bbb_id, name, password, join_opts)
+  # end
 
   # Creates a meeting on the BigBlueButton server.
   def start_session(room, options = {})
@@ -102,8 +103,8 @@ module BbbServer
       meeting = bbb_server.create_meeting(room.name, room.bbb_id, create_options)
       # Update session info.
       unless meeting[:messageKey] == 'duplicateWarning'
-        room.update_attributes(sessions: room.sessions + 1, last_session: DateTime.now, active: true)
-        
+        room.update_attributes(sessions: room.sessions + 1,last_session: DateTime.now, active: true)
+
         @session_history = SessionHistory.new(room_id: room.id, user_id: room.user_id, start_session: DateTime.now)
         @session_history.save
       end
@@ -133,14 +134,5 @@ module BbbServer
   def delete_all_recordings(bbb_id)
     record_ids = bbb_server.get_recordings(meetingID: bbb_id)[:recordings].pluck(:recordID)
     bbb_server.delete_recordings(record_ids) unless record_ids.empty?
-  end
-
-  # Obtener el numero total de participantes en etsa sala
-  def participants_count(bbb_id, room)
-    options = {}
-    # Determine the password to use when joining.
-    password = options[:user_is_moderator] ? room.moderator_pw : room.attendee_pw
-
-    bbb_server.get_meeting_info(bbb_id, password)
   end
 end
