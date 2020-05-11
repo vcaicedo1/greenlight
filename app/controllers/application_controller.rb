@@ -56,27 +56,29 @@ class ApplicationController < ActionController::Base
   #   @bbb_server ||= Rails.configuration.loadbalanced_configuration ? bbb(@user_domain, apt_domain_name) : bbb("greenlight", apt_domain_name)
   # end
 
-  # Determinar un dominio a traves del rol de un usuario
-  def apt_domain(role_user_room)
-    if role_user_room
-      array_role = role_user_room.split("_")
-      if array_role.length == 2
-        apt_domain_name = role_user_room.split("_")[1]
-      else
-        apt_domain_name = "apt"
-      end
-    else
-      if current_user&.has_role_org?(:_claro)
-        apt_domain_name = "claro"
-      elsif current_user&.has_role_org?(:_gobval)
-        apt_domain_name = "gobval"
-      elsif current_user&.has_role_org?(:_tres)
-        apt_domain_name = "tres"
-      else
-        apt_domain_name = "apt"
-      end
-    end
-  end
+  # # Determinar un dominio a traves del rol de un usuario
+  # def apt_domain(role_user_room)
+  #   if role_user_room
+  #     array_role = role_user_room.split("_")
+  #     if array_role.length == 2
+  #       apt_domain_name = role_user_room.split("_")[1]
+  #     else
+  #       apt_domain_name = "apt"
+  #     end
+  #   else
+  #     if current_user&.has_role_org?(:_claro)
+  #       apt_domain_name = "claro"
+  #     elsif current_user&.has_role_org?(:_gobval)
+  #       apt_domain_name = "gobval"
+  #     elsif current_user&.has_role_org?(:_tres)
+  #       apt_domain_name = "tres"
+  #     elsif current_user&.has_role_org?(:_cuatro)
+  #       apt_domain_name = "cuatro"
+  #     else
+  #       apt_domain_name = "apt"
+  #     end
+  #   end
+  # end
 
   # Force SSL
   def redirect_to_https

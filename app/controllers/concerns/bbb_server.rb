@@ -35,11 +35,6 @@ module BbbServer
     bbb_server.get_meetings
   end
 
-  # Returns a list of all running meetings
-  # def room_running_by_role?(bbb_id, role_user_room)
-  #   bbb_server_by_role(role_user_room).is_meeting_running?(bbb_id)
-  # end
-
   def get_recordings(meeting_id)
     bbb_server.get_recordings(meetingID: meeting_id)
   end
@@ -65,7 +60,12 @@ module BbbServer
     bbb_server.join_meeting_url(room.bbb_id, name, password, join_opts)
   end
 
-  # Devuelve una URL para unirse a una usuario en una reunión por medio del rol del propietario de la sala
+  # # Returns a list of all running meetings
+  # def room_running_by_role?(bbb_id, role_user_room)
+  #   bbb_server_by_role(role_user_room).is_meeting_running?(bbb_id)
+  # end
+
+  # #Devuelve una URL para unirse a una usuario en una reunión por medio del rol del propietario de la sala
   # def join_path_by_role(role_user_room, room, name, options = {}, uid = nil)
   #   # Create the meeting, even if it's running
   #   start_session(room, options)
