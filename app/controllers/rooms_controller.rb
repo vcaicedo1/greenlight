@@ -167,6 +167,8 @@ class RoomsController < ApplicationController
       if running
         runningsss = get_meeting(room.bbb_id, room.moderator_pw)
         logger.info "Corriendo: #{runningsss}"
+        logger.info "Corriendo1: #{runningsss[:participantCount]}"
+        
       end
 
 
