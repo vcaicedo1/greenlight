@@ -159,7 +159,7 @@ class RoomsController < ApplicationController
     active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
 
-      running = room_is_running(room.bbb_id)
+      running = room_running?(@room.bbb_id)
       logger.info "Etsa corriendo: #{running}"
 
 
