@@ -161,11 +161,11 @@ class RoomsController < ApplicationController
 
 
 
-      running = room_running?(@room.bbb_id)
+      running = room_running?(room.bbb_id)
       logger.info "Esta corriendo: #{running}"
 
       if running
-        runningsss = get_meeting(@room.bbb_id, @room.moderator_pw)
+        runningsss = get_meeting(room.bbb_id, room.moderator_pw)
         logger.info "Corriendo: #{runningsss}"
       end
 
@@ -173,7 +173,7 @@ class RoomsController < ApplicationController
 
 
 
-      logger.info "Sala activa: #{room.id} #{@room.uid} #{@room.id}"
+      logger.info "Sala activa: #{room.id} | #{room.uid}"
       active_room_name = room.name
       if @room.id != room.id
         active_rooms += 1
