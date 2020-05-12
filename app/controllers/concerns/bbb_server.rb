@@ -36,8 +36,8 @@ module BbbServer
   end
 
   # Obtener datos de reunion
-  def get_meeting(bbb_id)
-    bbb_server.get_meeting_info(bbb_id)
+  def get_meeting(bbb_id, password)
+    bbb_server.get_meeting_info(bbb_id, password)
   end
 
   def get_recordings(meeting_id)
