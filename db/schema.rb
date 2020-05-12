@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
     t.string "activation_digest"
     t.datetime "activated_at"
     t.boolean "deleted", default: false, null: false
+    t.integer "organization_id"
     t.index ["created_at"], name: "index_users_on_created_at"
     t.index ["deleted"], name: "index_users_on_deleted"
     t.index ["email"], name: "index_users_on_email"
@@ -168,6 +169,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
     t.integer "country_id"
     t.integer "state_id"
     t.integer "city_id"
+    t.integer "reseller_id"
     t.index ["reseller_id"], name: "index_organizations_on_reseller_id"
   end
 
