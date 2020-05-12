@@ -166,6 +166,7 @@ class RoomsController < ApplicationController
         if meeting[:participantCount] == 0
           room.update_attributes(end_last_session: DateTime.now, active: false)
           end_meeting(room.bbb_id, room.moderator_pw)
+          logger.info "Finalizando sala activa: #{room.id} | #{room.uid} | Participantes activos: #{meeting[:participantCount]}"
         else
           logger.info "Sala activa: #{room.id} | #{room.uid} | Participantes activos: #{meeting[:participantCount]}"
           active_room_name = room.name
@@ -174,7 +175,9 @@ class RoomsController < ApplicationController
           end  
         end
       else
-        room.update_attributes(end_last_session: DateTime.now, active: false)
+        if @room.id != room.id
+          room.update_attributes(end_last_session: DateTime.now, active: false)
+        end        
       end   
        
     end
