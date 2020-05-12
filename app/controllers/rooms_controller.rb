@@ -159,8 +159,15 @@ class RoomsController < ApplicationController
     active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
 
+
+
       running = room_running?(@room.bbb_id)
-      logger.info "Etsa corriendo: #{running}"
+      logger.info "Esta corriendo: #{running}"
+
+      runningsss = get_meeting(@room.bbb_id)
+      logger.info "Corriendo: #{runningsss}"
+
+
 
 
       logger.info "Sala activa: #{room.id} #{@room.uid} #{@room.id}"
