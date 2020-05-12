@@ -159,27 +159,24 @@ class RoomsController < ApplicationController
     active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
 
-
-
       running = room_running?(room.bbb_id)
-      logger.info "Esta corriendo: #{running}"
-
       if running
-        runningsss = get_meeting(room.bbb_id, room.moderator_pw)
-        logger.info "Corriendo: #{runningsss}"
-        logger.info "Corriendo1: #{runningsss[:participantCount]}"
-        
-      end
+        meeting = get_meeting(room.bbb_id, room.moderator_pw)
 
-
-
-
-
-      logger.info "Sala activa: #{room.id} | #{room.uid}"
-      active_room_name = room.name
-      if @room.id != room.id
-        active_rooms += 1
-      end      
+        if meeting[:participantCount] == 0
+          room.update_attributes(end_last_session: DateTime.now, active: false)
+          end_meeting(room.bbb_id, room.moderator_pw)
+        else
+          logger.info "Sala activa: #{room.id} | #{room.uid} | Participantes activos: #{meeting[:participantCount]}"
+          active_room_name = room.name
+          if @room.id != room.id
+            active_rooms += 1
+          end  
+        end
+      else
+        room.update_attributes(end_last_session: DateTime.now, active: false)
+      end   
+       
     end
 
     if active_rooms > 0
