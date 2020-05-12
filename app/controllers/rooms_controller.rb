@@ -158,6 +158,11 @@ class RoomsController < ApplicationController
     active_rooms = 0
     active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
+
+      running = room_is_running(room.bbb_id)
+      logger.info "Etsa corriendo: #{running}"
+
+
       logger.info "Sala activa: #{room.id} #{@room.uid} #{@room.id}"
       active_room_name = room.name
       if @room.id != room.id
