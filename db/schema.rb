@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
     t.index ["password_digest"], name: "index_users_on_password_digest", unique: true
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["room_id"], name: "index_users_on_room_id"
+    t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -149,15 +150,11 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.integer "reseller_id"
     t.string "name"
     t.string "legalid"
     t.string "address"
     t.string "phone"
     t.string "email"
-    t.integer "country_id"
-    t.integer "state_id"
-    t.integer "city_id"
     t.string "imagelogo"
     t.boolean "email_verified", default: false
     t.string "responsible"
@@ -168,6 +165,10 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
     t.boolean "enabled", default: false  
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.integer "state_id"
+    t.integer "city_id"
+    t.index ["reseller_id"], name: "index_organizations_on_reseller_id"
   end
 
   create_table "resellers", force: :cascade do |t|
@@ -179,13 +180,13 @@ ActiveRecord::Schema.define(version: 2020_01_30_144841) do
     t.string "responsible"
     t.string "serverslist", default: "{ }"
     t.string "imagelogo"
-    t.integer "country_id"
-    t.integer "state_id"
-    t.integer "city_id"
     t.boolean "email_verified", default: false
     t.boolean "enabled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.integer "state_id"
+    t.integer "city_id"
   end
 
 end
