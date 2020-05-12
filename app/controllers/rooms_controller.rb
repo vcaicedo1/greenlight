@@ -164,10 +164,10 @@ class RoomsController < ApplicationController
       running = room_running?(@room.bbb_id)
       logger.info "Esta corriendo: #{running}"
 
-      if(running){
+      if running
         runningsss = get_meeting(@room.bbb_id, @room.moderator_pw)
         logger.info "Corriendo: #{runningsss}"
-      }
+      end
 
 
 
