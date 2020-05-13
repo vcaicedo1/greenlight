@@ -1,4 +1,3 @@
- 
 # frozen_string_literal: true
 
 # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
