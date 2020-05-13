@@ -37,6 +37,10 @@ describe RoomsController, type: :controller do
     before do
       @user = create(:user)
       @owner = create(:user)
+      
+      logger.info "Esta pasando por cargar la org"
+      @organization = Organization.find_by(id: @user.organization_id)
+      logger.info "Esta pasando por cargar la org #{@organization}"
     end
 
     it "should fetch recordings and room state if user is owner" do
