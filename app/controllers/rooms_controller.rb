@@ -66,6 +66,10 @@ class RoomsController < ApplicationController
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
 
+    logger.info "Esta pasando por cargar la org"
+    @organization = Organization.find_by(id: @user.organization_id)
+    logger.info "Esta pasando por cargar la org #{@organization}"
+
     # If its the current user's room
     if current_user && (@room.owned_by?(current_user) || @shared_room)
       if current_user.highest_priority_role.get_permission("can_create_rooms")
