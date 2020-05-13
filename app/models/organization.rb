@@ -10,7 +10,7 @@ class Organization < ApplicationRecord
 
   #Retorna datos organizacion
   def self.id(organization_id)
-    Organization.where(id: organization_id)
+    where(id: organization_id)
   end
 
 end
