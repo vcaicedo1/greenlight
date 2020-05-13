@@ -67,8 +67,9 @@ class RoomsController < ApplicationController
     @shared_room = room_shared_with_user
 
     logger.info "Esta pasando por cargar la org"
-    @organization = Organization.find_by(id: @user.organization_id)
+    @organization = Organization.find_by(id: current_user.organization_id)
     logger.info "Esta pasando por cargar la org #{@organization}"
+    logger.info "Esta pasando por cargar la org #{@organization.name}"
 
     # If its the current user's room
     if current_user && (@room.owned_by?(current_user) || @shared_room)
