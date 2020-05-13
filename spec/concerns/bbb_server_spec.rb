@@ -27,11 +27,6 @@ describe BbbServer do
   before do
     @user = create(:user)
     @room = @user.main_room
-
-
-    logger.info "Esta pasando por cargar la org"
-    @organization = Organization.find_by(id: @user.organization_id)
-    logger.info "Esta pasando por cargar la org #{@organization}"
   end
 
   context "#running?" do
