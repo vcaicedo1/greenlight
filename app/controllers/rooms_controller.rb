@@ -67,7 +67,7 @@ class RoomsController < ApplicationController
     @shared_room = room_shared_with_user
     @organization = Organization.find_by(id: current_user.organization_id)
 
-    alert: I18n.t("room.invalid_provider")
+    redirect_to room_path, alert: I18n.t("bigbluebutton_exception_active_room", room_name: "Feliz dia!")
 
     # If its the current user's room
     if current_user && (@room.owned_by?(current_user) || @shared_room)
