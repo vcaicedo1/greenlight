@@ -35,11 +35,11 @@
         
         <% if @organization.nil? %>
           <h4 class="text-left mb-6">
-            <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %> | <%= t("room.organization") %>: <%= @organization.name %>
+            <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %>
           </h4>
         <% else %>
           <h4 class="text-left mb-6">
-            <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %>
+            <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %> | <%= t("room.organization") %>: <%= @organization.name %>
           </h4>
         <% end %>
      
