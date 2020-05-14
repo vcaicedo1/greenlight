@@ -67,10 +67,11 @@ class RoomsController < ApplicationController
     @shared_room = room_shared_with_user
     @organization = Organization.find_by(id: current_user.organization_id)
 
-    logger.info "Support: Esta es una prueba para saber si pasa por aca."
+    logger.info "Support: Esta es una prueba para saber si pasa por aca. 1"
 
     # If its the current user's room
     if current_user && (@room.owned_by?(current_user) || @shared_room)
+      logger.info "Support: Esta es una prueba para saber si pasa por aca. 2"
       if current_user.highest_priority_role.get_permission("can_create_rooms")
         # User is allowed to have rooms
         @search, @order_column, @order_direction, recs =
@@ -79,16 +80,21 @@ class RoomsController < ApplicationController
         @user_list = shared_user_list if shared_access_allowed
 
         @pagy, @recordings = pagy_array(recs)
+        logger.info "Support: Esta es una prueba para saber si pasa por aca. 3"
       else
         # Render view for users that cant create rooms
         @recent_rooms = Room.where(id: cookies.encrypted["#{current_user.uid}_recently_joined_rooms"])
         render :cant_create_rooms
+        logger.info "Support: Esta es una prueba para saber si pasa por aca. 4"
       end
     else
+      logger.info "Support: Esta es una prueba para saber si pasa por aca. 5"
       return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
 
       show_user_join
+      logger.info "Support: Esta es una prueba para saber si pasa por aca. 6"
     end
+    logger.info "Support: Esta es una prueba para saber si pasa por aca. 7"
   end
 
   # POST /:room_uid
