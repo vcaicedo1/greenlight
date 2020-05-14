@@ -20,8 +20,8 @@
   </div>
 <% end %>
 <div class="alert alert-success alert-dismissible text-center mb-0">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <strong>¡Feliz día del Maestro! Gracias por tu importante labor de educar.</strong> Sabemos que necesitas contar con lo mejor, <strong><a href="https://forms.gle/SQSBfmz3ReLYaDHr5"  target="_blank"> por favor califica nuestro servicio.</a></strong>
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>¡Feliz día del Maestro! Gracias por tu importante labor de educar.</strong> Sabemos que necesitas contar con lo mejor, <strong><a href="https://forms.gle/SQSBfmz3ReLYaDHr5"  target="_blank"> por favor califica nuestro servicio.</a></strong>
 </div>
 <div class="background pb-1">
   <div class="container">
@@ -43,7 +43,7 @@
           </h4>
         <% else %>
           <h4 class="text-left mb-6">
-            <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %> ||| <%= t("room.organization") %>: <%= @organization.name %>
+            <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %> | <%= t("room.organization") %>: <%= @organization.name %>
           </h4>
         <% end %>
      
