@@ -66,7 +66,8 @@ class RoomsController < ApplicationController
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
     @organization = Organization.find_by(id: current_user.organization_id)
-    alert: I18n.t("bigbluebutton_exception_active_room", room_name: 'feliz dia')
+    
+    flash: { alert: I18n.t("room.invalid_provider") }
 
     # If its the current user's room
     if current_user && (@room.owned_by?(current_user) || @shared_room)
