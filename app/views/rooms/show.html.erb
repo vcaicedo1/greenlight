@@ -33,15 +33,15 @@
           <% end %>
         </div>
         
-        <%= if @organization.nil? %>
+        <% if @organization.nil? %>
           <h4 class="text-left mb-6">
             <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %> | <%= t("room.organization") %>: <%= @organization.name %>
           </h4>
-        <%= else %>
+        <% else %>
           <h4 class="text-left mb-6">
             <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %>
           </h4>
-        <%= end %>
+        <% end %>
      
         <% unless exceeds_limit %>
           <label class="form-label"><%= t("room.invite_participants") %></label>
