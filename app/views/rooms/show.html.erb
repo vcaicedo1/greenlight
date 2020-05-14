@@ -33,7 +33,7 @@
           <% end %>
         </div>
         <h4 class="text-left mb-6">
-        <%= if @organization %>
+        <%= if @organization.nil? %>
         <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %> | <%= t("room.organization") %>: <%= @organization.name %>
         <%= else %>
         <%= @room.sessions %> <%= t("room.sessions") %> | <%= @recordings.length %> <%= t("room.recordings") %>
