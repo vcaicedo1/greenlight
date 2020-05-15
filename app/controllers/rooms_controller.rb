@@ -66,7 +66,7 @@ class RoomsController < ApplicationController
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
 
-    if current_user.organization_id.nil?
+    if current_user && current_user.organization_id
       @organization = Organization.find_by(id: current_user.organization_id)
     end    
 
