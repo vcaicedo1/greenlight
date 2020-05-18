@@ -90,7 +90,7 @@ class RoomsController < ApplicationController
         logger.info "Fecha actual: #{DateTime.now()}"
         logger.info "Caduca: #{@organization.nextinvoice}"
         if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
-          return '', flash: { warning: I18n.t("aulaparatodos_exception_expiration") }
+          return '', flash: { alert: I18n.t("aulaparatodos_exception_expiration") }
         end
       end
 
@@ -98,7 +98,6 @@ class RoomsController < ApplicationController
       return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
 
       show_user_join
-      logger.info "Paso3"
     end
   end
 
