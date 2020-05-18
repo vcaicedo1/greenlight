@@ -92,9 +92,8 @@ class RoomsController < ApplicationController
     end
 
     if !@organization.nil? 
-      logger.info "Fecha actual: #{DateTime.now()}"
-      logger.info "Caduca: #{@organization.nextinvoice}"
-      if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
+      if @organization.nextinvoice && @organization.reseller_id && @organization.reseller_id == 1 && DateTime.now() > @organization.nextinvoice
+        logger.info "La organizacion #{@organization.name} ha caducado: #{@organization.nextinvoice}"
         flash[:alert] = I18n.t("aulaparatodos_exception_expiration")
       end
     end
