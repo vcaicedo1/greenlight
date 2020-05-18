@@ -68,14 +68,6 @@ class RoomsController < ApplicationController
 
     if current_user && current_user.organization_id
       @organization = Organization.find_by(id: current_user.organization_id)
-
-      if !@organization.nil? 
-        logger.info "Fecha actual: #{DateTime.now()}"
-        logger.info "Caduca: #{@organization.nextinvoice}"
-        if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
-          #flash: { warning: I18n.t("aulaparatodos_exception_expiration") }
-        end
-      end
     end    
 
     # If its the current user's room
@@ -94,6 +86,14 @@ class RoomsController < ApplicationController
         @recent_rooms = Room.where(id: cookies.encrypted["#{current_user.uid}_recently_joined_rooms"])
         render :cant_create_rooms
         logger.info "Paso 2"
+      end
+
+      if !@organization.nil? 
+        logger.info "Fecha actual: #{DateTime.now()}"
+        logger.info "Caduca: #{@organization.nextinvoice}"
+        if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
+          return null, flash: { warning: I18n.t("aulaparatodos_exception_expiration") }
+        end
       end
     else
       return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
