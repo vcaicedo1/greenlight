@@ -76,6 +76,8 @@ class RoomsController < ApplicationController
         end
         jj = @organization.nextinvoice && @organization.nextinvoice > DateTime.now()
         logger.info "Fecha actual: #{jj}"
+        logger.info "Fecha actual: #{DateTime.now()}"
+        logger.info "Fecha actual: #{@organization.nextinvoice > DateTime.now()}"
       end
     end    
 
