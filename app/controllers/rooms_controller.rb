@@ -90,7 +90,7 @@ class RoomsController < ApplicationController
         logger.info "Fecha actual: #{DateTime.now()}"
         logger.info "Caduca: #{@organization.nextinvoice}"
         if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
-          return '', flash: { alert: I18n.t("aulaparatodos_exception_expiration") }
+          return redirect_to root_path, flash: { warning: I18n.t("aulaparatodos_exception_expiration") }
         end
       end
 
