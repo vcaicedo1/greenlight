@@ -73,7 +73,7 @@ class RoomsController < ApplicationController
         logger.info "Fecha actual: #{DateTime.now()}"
         logger.info "Caduca: #{@organization.nextinvoice}"
         if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
-          flash: { warning: I18n.t("aulaparatodos_exception_expiration") }
+          #flash: { warning: I18n.t("aulaparatodos_exception_expiration") }
         end
       end
     end    
@@ -88,15 +88,18 @@ class RoomsController < ApplicationController
         @user_list = shared_user_list if shared_access_allowed
 
         @pagy, @recordings = pagy_array(recs)
+        logger.info "Paso 1"
       else
         # Render view for users that cant create rooms
         @recent_rooms = Room.where(id: cookies.encrypted["#{current_user.uid}_recently_joined_rooms"])
         render :cant_create_rooms
+        logger.info "Paso 2"
       end
     else
       return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
 
       show_user_join
+      logger.info "Paso3"
     end
   end
 
