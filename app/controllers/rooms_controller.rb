@@ -95,10 +95,10 @@ class RoomsController < ApplicationController
       logger.info "Fecha actual: #{DateTime.now()}"
       logger.info "Caduca: #{@organization.nextinvoice}"
       if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
-        flash[:warning] = I18n.t("aulaparatodos_exception_expiration")
+        flash[:alert] = I18n.t("aulaparatodos_exception_expiration")
       end
     end
-    
+
   end
 
   # POST /:room_uid
