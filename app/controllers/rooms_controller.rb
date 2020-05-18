@@ -70,14 +70,11 @@ class RoomsController < ApplicationController
       @organization = Organization.find_by(id: current_user.organization_id)
 
       if !@organization.nil? 
+        logger.info "Fecha actual: #{DateTime.now()}"
         logger.info "Caduca: #{@organization.nextinvoice}"
-        if @organization.nextinvoice && @organization.nextinvoice > DateTime.now()
+        if @organization.nextinvoice && DateTime.now() > @organization.nextinvoice
           redirect_to room_path, alert: I18n.t("aulaparatodos_exception_expiration")
         end
-        jj = @organization.nextinvoice && @organization.nextinvoice > DateTime.now()
-        logger.info "Fecha actual: #{jj}"
-        logger.info "Fecha actual: #{DateTime.now()}"
-        logger.info "Fecha actual: #{@organization.nextinvoice > DateTime.now()}"
       end
     end    
 
