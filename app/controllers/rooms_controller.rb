@@ -68,6 +68,13 @@ class RoomsController < ApplicationController
 
     if current_user && current_user.organization_id
       @organization = Organization.find_by(id: current_user.organization_id)
+
+      if @organization.nil? 
+        logger.info "Caduce: #{@organization.nextinvoice}"
+        if @organization.nextinvoice && @organization.nextinvoice > Date.now
+          redirect_to room_path, alert: I18n.t("aulaparatodos_exception_expiration")
+        end
+      end
     end    
 
     # If its the current user's room
