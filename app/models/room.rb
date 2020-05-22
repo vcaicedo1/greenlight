@@ -38,8 +38,10 @@ class Room < ApplicationRecord
       "created_at"
     end
 
+    logger.info "Paso 1"
     organization = if !@organization.nil? 
       "users.organization_id = #{@organization.id} AND"
+      logger.info "Paso 2"
     else
       ""
     end
