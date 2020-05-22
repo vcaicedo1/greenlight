@@ -38,7 +38,13 @@ class Room < ApplicationRecord
       "created_at"
     end
 
-    search_query = "rooms.name LIKE :search OR rooms.uid LIKE :search OR users.email LIKE :search" \
+    organization = if !@organization.nil? 
+      "users.organization_id = #{@organization.id} AND"
+    else
+      ""
+    end
+
+    search_query = "#{organization} rooms.name LIKE :search OR rooms.uid LIKE :search OR users.email LIKE :search" \
     " OR users.#{created_at_query} LIKE :search"
 
     search_param = "%#{string}%"
