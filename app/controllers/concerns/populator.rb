@@ -57,7 +57,13 @@ module Populator
           .admins_search(@search)
           .admins_order(@order_column, @order_direction)
     else
-      Room.includes(:owner).all.admins_search(@search).admins_order(@order_column, @order_direction)
+    
+      if !organization.nil?
+        Room.includes(:owner).where(users: { organization_id: @organization.id }).admins_search(@search).admins_order(@order_column, @order_direction)
+      else
+        Room.includes(:owner).all.admins_search(@search).admins_order(@order_column, @order_direction)
+      end
+      
     end
   end
 

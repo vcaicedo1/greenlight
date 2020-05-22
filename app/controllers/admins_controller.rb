@@ -66,12 +66,13 @@ class AdminsController < ApplicationController
     @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "created_at"
     @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
 
-    logger.info "Support1: #{@order_column}"
-    logger.info "Support2: #{@order_direction}"
-
     @running_room_bbb_ids = all_running_meetings[:meetings].pluck(:meetingID)
 
     @user_list = shared_user_list if shared_access_allowed
+
+    if current_user && current_user.organization_id
+      @organization = Organization.find_by(id: current_user.organization_id)
+    end 
 
     @pagy, @rooms = pagy_array(server_rooms_list)
   end
