@@ -29,7 +29,7 @@ class Room < ApplicationRecord
   has_many :shared_access
   has_many :session_histories
 
-  def self.admins_search(string)
+  def self.admins_search(string, organization)
     active_database = Rails.configuration.database_configuration[Rails.env]["adapter"]
     # Postgres requires created_at to be cast to a string
     created_at_query = if active_database == "postgresql"
@@ -39,17 +39,14 @@ class Room < ApplicationRecord
     end
 
     logger.info "Paso 1"
-    if current_user && current_user.organization_id
-      @organization = Organization.find_by(id: current_user.organization_id)
-    end   
-    organization = if !@organization.nil? 
-      "users.organization_id = #{@organization.id} AND"
+    organization_filter = if !organization.nil? 
+      "users.organization_id = #{organization.id} AND"
       logger.info "Paso 2"
     else
       ""
     end
 
-    search_query = "#{organization} rooms.name LIKE :search OR rooms.uid LIKE :search OR users.email LIKE :search" \
+    search_query = "#{organization_filter} rooms.name LIKE :search OR rooms.uid LIKE :search OR users.email LIKE :search" \
     " OR users.#{created_at_query} LIKE :search"
 
     search_param = "%#{string}%"
