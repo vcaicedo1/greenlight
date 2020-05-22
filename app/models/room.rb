@@ -39,6 +39,9 @@ class Room < ApplicationRecord
     end
 
     logger.info "Paso 1"
+    if current_user && current_user.organization_id
+      @organization = Organization.find_by(id: current_user.organization_id)
+    end   
     organization = if !@organization.nil? 
       "users.organization_id = #{@organization.id} AND"
       logger.info "Paso 2"
