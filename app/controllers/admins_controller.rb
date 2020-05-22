@@ -70,6 +70,11 @@ class AdminsController < ApplicationController
 
     @user_list = shared_user_list if shared_access_allowed
 
+    logger.info "Paso eeeee"
+    if current_user && current_user.organization_id
+      @organization = Organization.find_by(id: current_user.organization_id)
+    end   
+
     @pagy, @rooms = pagy_array(server_rooms_list)
   end
 
