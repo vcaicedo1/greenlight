@@ -56,7 +56,6 @@ module Populator
         .admins_order(@order_column, @order_direction)
       end
 
-
     end
   end
 
@@ -83,7 +82,14 @@ module Populator
     if Rails.configuration.loadbalanced_configuration
       Room.includes(:owner).where(users: { provider: @user_domain }).pluck(:bbb_id)
     else
-      Room.pluck(:bbb_id)
+
+      # Validacion para filtrar datos por organizacion si se tiene asignada
+      if !@organization.nil?
+        Room.includes(:owner).where(users: { organization_id: @organization.id }).pluck(:bbb_id)
+      else
+        Room.pluck(:bbb_id)
+      end
+      
     end
   end
 

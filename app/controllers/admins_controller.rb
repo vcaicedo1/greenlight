@@ -62,6 +62,11 @@ class AdminsController < ApplicationController
     @search, @order_column, @order_direction, recs =
       all_recordings(server_rooms, params.permit(:search, :column, :direction), true, true)
 
+    # Validacion para filtrar datos por organizacion si se tiene asignada
+    if current_user && current_user.organization_id
+      @organization = Organization.find_by(id: current_user.organization_id)
+    end 
+
     @pagy, @recordings = pagy_array(recs)
   end
 
