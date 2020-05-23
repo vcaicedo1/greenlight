@@ -43,6 +43,11 @@ class AdminsController < ApplicationController
 
     @user_list = merge_user_list
 
+    # Validacion para filtrar datos por organizacion si se tiene asignada
+    if current_user && current_user.organization_id
+      @organization = Organization.find_by(id: current_user.organization_id)
+    end 
+
     @pagy, @users = pagy(manage_users_list)
   end
 
@@ -70,6 +75,7 @@ class AdminsController < ApplicationController
 
     @user_list = shared_user_list if shared_access_allowed
 
+    # Validacion para filtrar datos por organizacion si se tiene asignada
     if current_user && current_user.organization_id
       @organization = Organization.find_by(id: current_user.organization_id)
     end 
