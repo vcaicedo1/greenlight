@@ -152,8 +152,6 @@ class RoomsController < ApplicationController
 
   # POST /room/join
   def join_specific_room
-    logger.info "Support: Paso 3 #{params}"
-
     room_uid = params[:join_room][:url].split('/').last
 
     begin
@@ -373,9 +371,23 @@ class RoomsController < ApplicationController
 
   # Find the room from the uid.
   def find_room
-    logger.info "Support: Paso 1 #{params}"
 
-    logger.info "Support: Paso 2 #{params[:join_room]}"
+    datos = params[:room_uid]
+    array = datos.split('&')
+
+    if array.length > 1
+      uid = array[0]
+      estudiante = array[1]
+      pin = array[2]
+
+      params.room_uid = uid
+    end
+    
+
+    logger.info "Esta finalizando sesion el dueño de la sala #{params}"
+    logger.info "Esta finalizando sesion el dueño de la sala #{estudiante}"
+    logger.info "Esta finalizando sesion el dueño de la sala #{pin}"
+
 
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
