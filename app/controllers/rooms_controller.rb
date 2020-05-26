@@ -66,8 +66,6 @@ class RoomsController < ApplicationController
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
 
-    logger.info "Support: Paso 1"
-
     if current_user && current_user.organization_id
       @organization = Organization.find_by(id: current_user.organization_id)
     end    
@@ -88,6 +86,7 @@ class RoomsController < ApplicationController
         render :cant_create_rooms
       end
     else
+      logger.info "Support: Paso 1"
       return redirect_to root_path, flash: { alert: I18n.t("room.invalid_provider") } if incorrect_user_domain
 
       show_user_join
