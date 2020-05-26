@@ -372,6 +372,10 @@ class RoomsController < ApplicationController
   # Find the room from the uid.
   def find_room
     logger.info "Support: Paso 1 #{params}"
+
+    logger.info "Support: Paso 2 #{params[:join_room]}"
+    logger.info "Support: Paso 3 #{params[:join_room][:url]}"
+
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
 
