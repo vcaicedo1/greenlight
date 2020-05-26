@@ -50,8 +50,6 @@ module Joiner
   def join_room(opts)
     room_settings = JSON.parse(@room[:room_settings])
 
-    logger.info "Support: Paso 2"
-
     if room_running?(@room.bbb_id) || @room.owned_by?(current_user) || room_settings["anyoneCanStart"]
 
       # Determine if the user needs to join as a moderator.

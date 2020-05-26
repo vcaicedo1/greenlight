@@ -52,6 +52,7 @@ class RecordingsController < ApplicationController
   private
 
   def find_room
+    logger.info "Support: Paso 1"
     @room = Room.find_by!(bbb_id: params[:meetingID])
   end
 
