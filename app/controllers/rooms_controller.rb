@@ -66,6 +66,8 @@ class RoomsController < ApplicationController
     @room_running = room_running?(@room.bbb_id)
     @shared_room = room_shared_with_user
 
+    logger.info "Support: Paso 1"
+
     if current_user && current_user.organization_id
       @organization = Organization.find_by(id: current_user.organization_id)
     end    
@@ -153,8 +155,6 @@ class RoomsController < ApplicationController
   # POST /room/join
   def join_specific_room
     room_uid = params[:join_room][:url].split('/').last
-
-    logger.info "Support Paso:  #{room_uid}"
 
     begin
       @room = Room.find_by!(uid: room_uid)
