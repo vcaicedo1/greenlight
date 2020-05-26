@@ -24,7 +24,7 @@
               required: true,
               class: "form-control join-form",
               placeholder: t("room.enter_the_access_code"),
-              value: params[:user_name],
+              value: @parameters.user_name,
               autofocus: true %>
         <%= f.submit t("room.login"), class: "btn btn-primary btn-sm col-sm-3 form-control join-form" %>
       </div>

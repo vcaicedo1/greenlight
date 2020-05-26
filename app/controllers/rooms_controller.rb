@@ -384,6 +384,7 @@ class RoomsController < ApplicationController
       params[:user_name] = data_user
       params[:user_pin] = data_pin
 
+      @parameters = params
       logger.info "Accediendo desde evaluateok: #{data_user} [#{data_pin}]"
     end
 
