@@ -155,7 +155,6 @@ class RoomsController < ApplicationController
     room_uid = params[:join_room][:url].split('/').last
 
     begin
-      logger.info "Support: Paso 2"
       @room = Room.find_by!(uid: room_uid)
     rescue ActiveRecord::RecordNotFound
       return redirect_to current_user.main_room, alert: I18n.t("room.no_room.invalid_room_uid")
@@ -372,7 +371,7 @@ class RoomsController < ApplicationController
 
   # Find the room from the uid.
   def find_room
-    logger.info "Support: Paso 3"
+    logger.info "Support: Paso 1 #{params}"
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
 
