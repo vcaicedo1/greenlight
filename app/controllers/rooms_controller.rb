@@ -380,7 +380,7 @@ class RoomsController < ApplicationController
       estudiante = array[1]
       pin = array[2]
 
-      params.room_uid = uid
+      params[:room_uid] = uid
     end
     
 
