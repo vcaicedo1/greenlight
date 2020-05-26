@@ -154,6 +154,8 @@ class RoomsController < ApplicationController
   def join_specific_room
     room_uid = params[:join_room][:url].split('/').last
 
+    logger.info "Pasandoooooo por aca #{params[:join_room][:url]}"
+
     begin
       @room = Room.find_by!(uid: room_uid)
     rescue ActiveRecord::RecordNotFound
