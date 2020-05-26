@@ -372,22 +372,20 @@ class RoomsController < ApplicationController
   # Find the room from the uid.
   def find_room
 
-    datos = params[:room_uid]
-    array = datos.split('&')
+    data_parameters = params[:room_uid]
+    parameters = data_parameters.split('&')
 
-    if array.length > 1
-      uid = array[0]
-      estudiante = array[1]
-      pin = array[2]
+    if parameters.length > 1
+      data_uid = parameters[0]
+      data_user = parameters[1]
+      data_pin = parameters[2]
 
-      params[:room_uid] = uid
+      params[:room_uid] = data_uid
+      params[:user_name] = data_user
+      params[:user_pin] = data_pin
+
+      logger.info "Accediendo desde evaluateok: #{data_user} [#{data_pin}]"
     end
-    
-
-    logger.info "Esta finalizando sesion el dueño de la sala #{params}"
-    logger.info "Esta finalizando sesion el dueño de la sala #{estudiante}"
-    logger.info "Esta finalizando sesion el dueño de la sala #{pin}"
-
 
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
