@@ -152,6 +152,8 @@ class RoomsController < ApplicationController
 
   # POST /room/join
   def join_specific_room
+    logger.info "Support: Paso 3 #{params}"
+
     room_uid = params[:join_room][:url].split('/').last
 
     begin
@@ -374,7 +376,6 @@ class RoomsController < ApplicationController
     logger.info "Support: Paso 1 #{params}"
 
     logger.info "Support: Paso 2 #{params[:join_room]}"
-    logger.info "Support: Paso 3 #{params[:join_room][:url]}"
 
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
   end
