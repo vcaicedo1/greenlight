@@ -305,6 +305,7 @@ class RoomsController < ApplicationController
   # GET /:room_uid/logout
   def logout
     logger.info "Support: #{current_user.present? ? current_user.email : 'Guest'} has left room #{@room.uid}"
+    logger.info "Support: #{params}"
 
     if current_user.present? ? @room.owned_by?(current_user) : false
       if room_running?(@room.bbb_id)
