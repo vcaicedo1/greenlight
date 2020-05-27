@@ -27,6 +27,7 @@ module Joiner
       current_user.name
     elsif params[:user_name]
       params[:user_name]
+      join()
     elsif cookies.encrypted[:greenlight_name]
       cookies.encrypted[:greenlight_name]
     else
