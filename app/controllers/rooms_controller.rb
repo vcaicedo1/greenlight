@@ -305,7 +305,6 @@ class RoomsController < ApplicationController
   # GET /:room_uid/logout
   def logout
     logger.info "Support: #{current_user.present? ? current_user.email : 'Guest'} has left room #{@room.uid}"
-    logger.info "Support: #{params}"
 
     if current_user.present? ? @room.owned_by?(current_user) : false
       if room_running?(@room.bbb_id)
@@ -385,7 +384,16 @@ class RoomsController < ApplicationController
       params[:user_name] = data_user
       params[:user_pin] = data_pin
 
+      cookies.encrypted[:room_uid] = data_uid
+      cookies.encrypted[:user_name] = data_user
+      cookies.encrypted[:user_pin] = data_pin
+
       logger.info "Accediendo desde evaluateok: #{data_user} [#{data_pin}]"
+    else
+      if cookies.encrypted[:room_uid] && cookies.encrypted[:room_uid] == params[:room_uid]
+        params[:user_name] = cookies.encrypted[:user_name]
+        params[:user_pin] = cookies.encrypted[:user_pin]
+      end
     end
 
     @room = Room.includes(:owner).find_by!(uid: params[:room_uid])
