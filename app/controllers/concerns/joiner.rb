@@ -27,7 +27,6 @@ module Joiner
       current_user.name
     elsif params[:user_name]
       params[:user_name]
-      join()
     elsif cookies.encrypted[:greenlight_name]
       cookies.encrypted[:greenlight_name]
     else
@@ -39,7 +38,8 @@ module Joiner
 
     @pagy, @public_recordings = pagy_array(pub_recs)
 
-    render :join
+    # render :join
+    join()
   end
 
   # create or update cookie to track the three most recent rooms a user joined
