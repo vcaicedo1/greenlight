@@ -22,13 +22,11 @@ module Joiner
   # Displays the join room page to the user
   def show_user_join
 
-    logger.info "Show: #{params[:user_name]}"
-
     # Get users name
     @name = if current_user
       current_user.name
     elsif params[:user_name]
-      params[:user_name] 
+      params[:user_name]
     elsif cookies.encrypted[:greenlight_name]
       cookies.encrypted[:greenlight_name]
     else
