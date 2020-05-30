@@ -375,15 +375,11 @@ class RoomsController < ApplicationController
     data_parameters = params[:room_uid]
     parameters = data_parameters.split('&')
 
-    logger.info "Accediendo desde evaluateok1: #{parameters}]"
-
     if parameters.length > 1
 
       data_uid = parameters[0]
       data_parameters = Base64.decode64(parameters[1])
       parameters = data_parameters.split('&')
-
-      logger.info "Accediendo desde evaluateok2: #{parameters}]"
       
       data_user = parameters[0]
       data_pin = parameters[1]
