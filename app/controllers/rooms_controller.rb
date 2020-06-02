@@ -167,6 +167,40 @@ class RoomsController < ApplicationController
   def start
     logger.info "Support: #{current_user.email} is starting room #{@room.uid}"
 
+
+
+
+
+
+    if current_user && current_user.organization_id
+      @organization = Organization.find_by(id: current_user.organization_id)
+
+      expiration_date = @organization.nextinvoice
+      logger.info "Support1: #{expiration_date}"
+      expiration_date = (expiration_date + Rails.configuration.grace_days_for_use).to_s
+      logger.info "Support2: #{expiration_date}"
+
+
+      
+
+
+
+
+      # if !@organization.nil? 
+      #   if @organization.nextinvoice && @organization.reseller_id && @organization.reseller_id == 1 && DateTime.now() > @organization.nextinvoice
+      #     logger.info "La organizacion #{@organization.name} ha caducado: #{@organization.nextinvoice}"
+      #     flash[:alert] = I18n.t("aulaparatodos_exception_expiration")
+      #   end
+      # end
+    end   
+
+
+
+
+
+
+
+
     active_rooms = 0
     active_room_name = ""
     current_user.ordered_rooms_active.each do |room|
