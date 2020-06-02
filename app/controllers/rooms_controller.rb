@@ -179,7 +179,8 @@ class RoomsController < ApplicationController
 
           if DateTime.now() > expiration_date
             logger.info "La organizacion #{@organization.name} ha caducado y ha pasado los dias de gracia: #{expiration_date}"
-            return redirect_to room_path, alert: I18n.t("aulaparatodos_exception_expiration_grace_day")
+            flash[:alert] = I18n.t("aulaparatodos_exception_expiration_grace_day")
+            return false
           end
           
         end
