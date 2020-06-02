@@ -177,7 +177,7 @@ class RoomsController < ApplicationController
 
       expiration_date = @organization.nextinvoice
       logger.info "Support1: #{expiration_date}"
-      expiration_date = (expiration_date + Rails.configuration.grace_days_for_use).to_s
+      expiration_date = (expiration_date + Rails.configuration.grace_days_for_use.to_i).to_s
       logger.info "Support2: #{expiration_date}"
 
 
