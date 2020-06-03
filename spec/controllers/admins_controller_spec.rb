@@ -242,7 +242,7 @@ describe AdminsController, type: :controller do
 
     context "POST permissions" do
       it "allows a user with the correct permission to manage users" do
-        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: true)
+        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: true, can_invite_users: true)
 
         @user2 = create(:user)
         @user2.add_role(:test)
@@ -263,7 +263,7 @@ describe AdminsController, type: :controller do
       end
 
       it "doesn't allow a user with the incorrect permission to manage users" do
-        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: false)
+        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: false, can_invite_users: false)
 
         @user2 = create(:user)
         @user2.add_role(:test)
@@ -507,7 +507,7 @@ describe AdminsController, type: :controller do
       end
 
       it "doesn't allow a user with the incorrect permission to edit site settings" do
-        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: true)
+        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: true, can_invite_users: true)
 
         @user2 = create(:user)
         @user2.add_role(:test)
@@ -687,7 +687,7 @@ describe AdminsController, type: :controller do
         @request.session[:user_id] = @admin.id
 
         patch :update_role, params: { role_id: new_role.id, role: { name: "test", can_edit_roles: false,
-          colour: "#45434", can_manage_users: true } }
+          colour: "#45434", can_manage_users: true, can_invite_users: true } }
 
         new_role.reload
         expect(new_role.name).to eq("test")
@@ -753,7 +753,7 @@ describe AdminsController, type: :controller do
         @request.session[:user_id] = @user2.id
 
         patch :update_role, params: { role_id: new_role.id, role: { name: "test3", can_edit_roles: false,
-          colour: "#45434", can_manage_users: true } }
+          colour: "#45434", can_manage_users: true, can_invite_users: true } }
 
         new_role.reload
         expect(new_role.name).to eq("test3")
@@ -761,7 +761,7 @@ describe AdminsController, type: :controller do
       end
 
       it "doesn't allow a user with the incorrect permission to edit roles" do
-        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: false)
+        Role.create_new_role("test", "greenlight").update_all_role_permissions(can_manage_users: false, can_invite_users: false)
 
         @user2 = create(:user)
         @user2.add_role(:test)
@@ -774,7 +774,7 @@ describe AdminsController, type: :controller do
         @request.session[:user_id] = @user2.id
 
         patch :update_role, params: { role_id: new_role.id, role: { name: "test3", can_edit_roles: false,
-          colour: "#45434", can_manage_users: true } }
+          colour: "#45434", can_manage_users: true, can_invite_users: true } }
 
         expect(response).to render_template "errors/greenlight_error"
       end
