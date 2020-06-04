@@ -131,15 +131,15 @@ module Emailer
   def admin_emails
     admins = User.all_users_with_roles.where(roles: { role_permissions: { name: "can_manage_users", value: "true" } })
 
-    logger.error "Support: Error in email delivery: #{admins}"
-
     if Rails.configuration.loadbalanced_configuration
       admins = admins.without_role(:super_admin)
                      .where(provider: @user_domain)
     end
 
     admins.collect(&:email).join(",")
-    admins = ""
+    
+    logger.info "#{admins}"
+    
   end
 
   def reset_link(user)
