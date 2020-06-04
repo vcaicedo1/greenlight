@@ -137,9 +137,6 @@ module Emailer
     end
 
     admins.collect(&:email).join(",")
-    
-    logger.info "#{admins}"
-    
   end
 
   def reset_link(user)

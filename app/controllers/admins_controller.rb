@@ -134,6 +134,8 @@ class AdminsController < ApplicationController
   def invite
     emails = params[:invite_user][:email].split(",")
 
+    logger.info "Prueaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbba:#{emails}"
+
     emails.each do |email|
       invitation = create_or_update_invite(email)
 
