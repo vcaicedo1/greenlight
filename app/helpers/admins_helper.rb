@@ -28,7 +28,7 @@ module AdminsHelper
     controller_name == "admins" && action_name == "index" &&
       @settings.get_value("Registration Method") == Rails.configuration.registration_methods[:invite]
 
-    jj = highest_role.get_permission("can_invite_users")
+    jj = @role.get_permission("can_invite_users")
     logger.info "Probandooooooooo:#{jj}"
   end
 
