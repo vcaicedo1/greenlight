@@ -106,7 +106,6 @@ es:
       colour:
         title: Color del rol
         info: Defina el color que será asociado al rol
-      invite_users: Permitir a los usuarios enviar invitaciones
     title: Configuración de la organización
     users:
       invite: Invitar usuario
@@ -135,7 +134,7 @@ es:
       title: Administrar usuarios
   add_to_google_calendar: "Agregar al Calendario de Google"
   aulaparatodos_exception_expiration: Esta cuenta está en el límite de sus 30 días de uso. Para usar AulaParaTodos por otros 30 días más puedes realizar tu pago línea <a href="https://biz.payulatam.com/L0c743d0992EECE" target="_blank"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" style="width:100px;"/></a> o <strong><a href="mailto:administracion@mindsit.co">contáctanos</a></strong> para gestionar tu factura vía email.
-  aulaparatodos_exception_expiration_grace_day: Su servicio mensual a caducado, para continuar usando los servicios completos de AulaParaTodos renueve su servicio mensual aquí <a href="https://biz.payulatam.com/L0c743d0992EECE" target="_blank"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" style="width:100px;"/></a>
+  aulaparatodos_exception_expiration_grace_day: Su servicio mensual a <strong>caducado</strong>, para continuar usando los servicios completos de <strong>AulaParaTodos</strong> renueve su servicio mensual aquí <a href="https://biz.payulatam.com/L0c743d0992EECE" target="_blank"><img src="http://www.payulatam.com/img-secure-2015/boton_pagar_pequeno.png" style="width:100px;"/></a>
   bigbluebutton: AulaParaTodos
   bigbluebutton_exception: ¡Oh no! Ocurrió un error al iniciar la sesión.
   bigbluebutton_exception_active_room: Usted ya tiene una sesión activa en la sala <strong>%{room_name}</strong>. Debe <strong>Finalizar sesión</strong> en esa sala para iniciar en una diferente.
@@ -464,12 +463,6 @@ es:
       roles: Roles de usuario
       subtitle: Actualizar información de usuario
       title: Información de la cuenta
-      organization:
-        name: Nombre
-        address: Dirección
-        responsible: Responsable
-        phone: Teléfono
-        email: Correo electrónico
     delete:
       button: "Si, me gustaría eleiminar mi cuenta de usuario."
       disclaimer: "Sí elijes eliminar tu cuenta de usuario, <b>NO</b> podrá ser recuperada. Toda la información relacionada con tu cuenta, incluyendo configuración, salas y grabaciones, será eliminada."
@@ -488,8 +481,6 @@ es:
     subtitle: Crear una cuenta
     title: Registrarse
     with: "Registrarse utilizando %{provider}"
-    organization_data: Datos de la organización
-    next: Siguiente
   terms:
     accept: Accepto los términos y condiciones
     accept_existing: Acepto los términos y condiciones
