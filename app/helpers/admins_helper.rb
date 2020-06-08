@@ -26,7 +26,11 @@ module AdminsHelper
 
   def admin_invite_registration
     controller_name == "admins" && action_name == "index" &&
-      @settings.get_value("Registration Method") == Rails.configuration.registration_methods[:invite]
+      @settings.get_value("Registration Method") == Rails.configuration.registration_methods[:invite] &&
+      current_role.get_permission("can_invite_users")
+
+    jj = current_role.get_permission("can_invite_users")
+    logger.info "Probandooooooooo:#{jj}"
   end
 
   def room_authentication_string
