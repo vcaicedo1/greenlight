@@ -409,7 +409,7 @@ class RoomsController < ApplicationController
     if parameters.length > 1
 
       data_uid = parameters[0]
-      data_parameters = Base64.decode64(parameters[1])
+      data_parameters = Base64.decode64(parameters[1]).force_encoding("UTF-8")
       parameters = data_parameters.split('&')
 
       logger.info "Test 2: #{data_parameters}"
