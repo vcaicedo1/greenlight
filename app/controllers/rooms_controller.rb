@@ -430,7 +430,7 @@ class RoomsController < ApplicationController
 
 
       # data_parameters = Base64.decode64(parameters[1]).force_encoding("UTF-8")
-      data_parameters = Base64.decode64(URI.unescape(parameters[1]));
+      data_parameters = Base64.decode64(URI.unescape(parameters[1])).force_encoding("ISO-8859-1").encode("UTF-8")
       parameters = data_parameters.split('&')
       
       data_user = parameters[0]
