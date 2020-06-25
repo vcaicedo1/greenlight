@@ -424,10 +424,13 @@ class RoomsController < ApplicationController
 
       data_uid = parameters[0]
 
-      logger.info "Accediendo desde evaluateok 1: #{(URI.unescape(parameters[1])).force_encoding("UTF-8")}"
+      logger.info "Accediendo desde evaluateok 1: #{(URI.unescape(parameters[1]))}"
       logger.info "Accediendo desde evaluateok 2: #{Base64.decode64(URI.unescape(parameters[1]))}"
 
-      data_parameters = Base64.decode64(URI.unescape(parameters[1])).force_encoding("UTF-8")
+
+
+      # data_parameters = Base64.decode64(parameters[1]).force_encoding("UTF-8")
+      data_parameters = Base64.decode64(URI.unescape(parameters[1]));
       parameters = data_parameters.split('&')
       
       data_user = parameters[0]
