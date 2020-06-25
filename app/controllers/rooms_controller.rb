@@ -423,6 +423,10 @@ class RoomsController < ApplicationController
     if parameters.length > 1
 
       data_uid = parameters[0]
+
+      logger.info "Accediendo desde evaluateok 1: #{CGI::unescape(parameters[1])}]"
+      logger.info "Accediendo desde evaluateok 2: #{Base64.decode64(CGI::unescape(parameters[1]))}]"
+
       data_parameters = Base64.decode64(CGI::unescape(parameters[1])).force_encoding("UTF-8")
       parameters = data_parameters.split('&')
       
