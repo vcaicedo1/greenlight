@@ -424,7 +424,7 @@ class RoomsController < ApplicationController
 
       data_uid = parameters[0]
       # data_parameters = Base64.decode64(parameters[1]).force_encoding("UTF-8")
-      data_parameters = Base64.decode64(URI.unescape(parameters[1])).force_encoding("ISO-8859-1").encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+      data_parameters = Base64.decode64(URI.unescape(parameters[1])).encode("UTF-8", "Windows-1252")
       parameters = data_parameters.split('&')
       
       data_user = parameters[0]
