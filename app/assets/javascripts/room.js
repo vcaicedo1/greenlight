@@ -115,6 +115,7 @@ $(document).on('turbolinks:load', function(){
       $("input[id=fileUsersAccess]").change(function(e) {
         readFileSelect(e);
       });
+      $("#download-template").click(function(){ downloadTemplate() });
     })
 
     $("#deleteParticipantModal").on("show.bs.modal", function(event) {
@@ -178,6 +179,10 @@ $(document).on('turbolinks:load', function(){
         $("#user-list").append(listItem)
       }
     })
+
+    $("#evaluateok").click(function() {
+      location.href='https://cloud.evaluateok.com/EvaluateOnline'
+    })
   }
 });
 
@@ -192,6 +197,7 @@ function showCreateRoom(target) {
   $("#room_require_moderator_approval").prop("checked", false)
   $("#room_anyone_can_start").prop("checked", false)
   $("#room_all_join_moderator").prop("checked", false)
+  $("#room_private_room").prop("checked", false)
 
   //show all elements & their children with a create-only class
   $(".create-only").each(function() {
@@ -252,6 +258,7 @@ function updateCurrentSettings(settings_path){
     $("#room_require_moderator_approval").prop("checked", settings.requireModeratorApproval)
     $("#room_anyone_can_start").prop("checked", settings.anyoneCanStart)
     $("#room_all_join_moderator").prop("checked", settings.joinModerator)
+    $("#room_private_room").prop("checked", settings.privateRoom)
   })
 }
 
@@ -335,6 +342,22 @@ function processData(data) {
   objSaveAccessChanges = arr;
   $("#save-participants").prop('disabled', false);
   $("#lbFileUsersAccess").text($("#fileUsersAccess")[0].files[0].name);
+}
+
+function downloadTemplate() {
+  createLink("Plantilla-Participantes.csv");
+  createLink("GuiaParaLlenarLaPlantilla.pdf");
+}
+
+function createLink(file) {
+  const url = document.URL.substr(0, document.URL.lastIndexOf("/")) + "/" + file;
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;  
+  a.download = file;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
 }
 
 // Get list of users shared with and display them
