@@ -345,7 +345,7 @@ function processData(data) {
 }
 
 function downloadTemplate() {
-  createLink("Plantilla-Participantes.csv");
+  createLink("Plantilla_Participantes.csv");
   createLink("GuiaParaLlenarLaPlantilla.pdf");
 }
 
