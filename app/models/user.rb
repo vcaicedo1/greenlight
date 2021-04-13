@@ -113,7 +113,11 @@ class User < ApplicationRecord
 
   # Retorna una lista de sala por ultima sesion que se encuentren activas
   def ordered_rooms_active
-    rooms.where(active: true).where.not(id: rooms_shared.pluck(:id)).order(Arel.sql("last_session IS NULL, last_session desc"))
+    if self.organization_id.nil?
+      Room.where(active: true, start_by: self.id).order(Arel.sql("last_session IS NULL, last_session desc"))
+    else
+      Room.all_by_company(self.organization_id).where(active: true, start_by: self.id).order(Arel.sql("last_session IS NULL, last_session desc"))
+    end
   end
 
   # Activates an account and initialize a users main room
@@ -150,8 +154,9 @@ class User < ApplicationRecord
 
   # Retrieves a list of rooms that the user has shared
   def rooms_shared
+    #logger.info "user id #{self.id}"
     #logger.info "salas compartidas por este usuario"
-    rooms.where(id: SharedAccess.pluck(:room_id))
+    rooms.where(id: shared_access.pluck(:room_id))
   end
 
   def name_chunk
