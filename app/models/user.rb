@@ -83,20 +83,21 @@ class User < ApplicationRecord
     search_query = ""
     role_search_param = ""
     if role.nil?
-      search_query = "users.name LIKE :search OR email LIKE :search OR username LIKE :search" \
-                    " OR users.#{created_at_query} LIKE :search OR users.provider LIKE :search" \
+      search_query = "lower(users.name) LIKE :search OR lower(users.email) LIKE :search OR lower(username) LIKE :search" \
+                    " OR users.#{created_at_query} LIKE :search OR lower(organizations.name) LIKE :search" \
                     " OR roles.name LIKE :roles_search"
       role_search_param = "%#{string}%"
     else
-      search_query = "(users.name LIKE :search OR email LIKE :search OR username LIKE :search" \
-                    " OR users.#{created_at_query} LIKE :search OR users.provider LIKE :search)" \
+      search_query = "(lower(users.name) LIKE :search OR lower(users.email) LIKE :search OR lower(username) LIKE :search" \
+                    " OR users.#{created_at_query} LIKE :search OR lower(organizations.name) LIKE :search)" \
                     " AND roles.name = :roles_search"
       role_search_param = role.name
     end
 
     search_param = "%#{string}%"
-    joins("LEFT OUTER JOIN users_roles ON users_roles.user_id = users.id LEFT OUTER JOIN roles " \
-      "ON roles.id = users_roles.role_id").distinct
+    joins("LEFT OUTER JOIN users_roles ON users_roles.user_id = users.id " \
+      "LEFT OUTER JOIN roles ON roles.id = users_roles.role_id " \
+      "LEFT OUTER JOIN organizations ON organizations.id = users.organization_id ").distinct
       .where(search_query, search: search_param, roles_search: role_search_param)
   end
 
@@ -110,9 +111,13 @@ class User < ApplicationRecord
     [main_room] + rooms.where.not(id: main_room.id).order(Arel.sql("last_session IS NULL, last_session desc"))
   end
 
-    # Retorna una lista de sala por ultima sesion que se encuentren activas
+  # Retorna una lista de sala por ultima sesion que se encuentren activas
   def ordered_rooms_active
-    rooms.where(active: true).where.not(id: shared_access.pluck(:room_id)).order(Arel.sql("last_session IS NULL, last_session desc"))
+    if self.organization_id.nil?
+      Room.where(active: true, start_by: self.id).order(Arel.sql("last_session IS NULL, last_session desc"))
+    else
+      Room.all_by_company(self.organization_id).where(active: true, start_by: self.id).order(Arel.sql("last_session IS NULL, last_session desc"))
+    end
   end
 
   # Activates an account and initialize a users main room
@@ -145,6 +150,13 @@ class User < ApplicationRecord
   # Retrieves a list of rooms that are shared with the user
   def shared_rooms
     Room.where(id: shared_access.pluck(:room_id))
+  end
+
+  # Retrieves a list of rooms that the user has shared
+  def rooms_shared
+    #logger.info "user id #{self.id}"
+    #logger.info "salas compartidas por este usuario"
+    rooms.where(id: shared_access.pluck(:room_id))
   end
 
   def name_chunk

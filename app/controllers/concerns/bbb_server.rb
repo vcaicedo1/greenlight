@@ -113,7 +113,7 @@ module BbbServer
       meeting = bbb_server.create_meeting(room.name, room.bbb_id, create_options)
       # Update session info.
       unless meeting[:messageKey] == 'duplicateWarning'
-        room.update_attributes(sessions: room.sessions + 1,last_session: DateTime.now, active: true)
+        room.update_attributes(sessions: room.sessions + 1, last_session: DateTime.now, active: true, start_by: current_user.id)
 
         @session_history = SessionHistory.new(room_id: room.id, user_id: room.user_id, start_session: DateTime.now)
         @session_history.save

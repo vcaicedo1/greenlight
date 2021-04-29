@@ -84,6 +84,39 @@ $(document).on('turbolinks:load', function(){
           $("#merge-from").html("<span>" + userInfo.name + "</span>" + "<span class='text-muted d-block'>" + userInfo.email + "</span>" + "<span id='from-uid' class='text-muted d-block'>" + userInfo.uid + "</span>")
         }
       })
+
+      //PopUp user edit organization
+      $("button[name='edit-organization']").click(function() {
+        showEditOrganization(this);
+        $("#editOrganizationModal").modal('show');
+      });
+
+      //----------------------------------------------------------------------
+      //selectpicker organization
+      //----------------------------------------------------------------------
+
+      // Organization selects one from all organizations
+      $(".organization .bootstrap-select").on("changed.bs.select", function() {
+        // Get the uid of the selected user
+        let organization = $(".organization .selectpicker").selectpicker('val')
+        if (organization) {
+          $("#usersbyorganization_organization").val(organization);
+        }
+      });
+
+      $(".organization .bootstrap-select").on("click", function() {
+        $(".bs-searchbox").siblings().hide()
+      });
+  
+      $(".organization .bs-searchbox input").on("input", function() {
+        if ($(".organization .bs-searchbox input").val() == '' || $(".organization .bs-searchbox input").val().length < 3) {
+          $(".organization .bs-searchbox").siblings().hide()
+        } else {
+          $(".organization .bs-searchbox").siblings().show()
+        }
+      });
+      //----------------------------------------------------------------------
+
     }
     else if(action == "site_settings"){
       loadColourSelectors()
@@ -137,6 +170,7 @@ $(document).on('turbolinks:load', function(){
       $("#deleteOrganizationModal").on("show.bs.modal", function(event) {
         $("#organization-delete-checkbox").click(organizationDeleteConfirm)
       })
+<<<<<<< HEAD
       
       $("#createOrganizationNextinvoice").attr("min", setFormattedDate(new Date()));
       $("#createOrganizationNextinvoice").focus(function() {
@@ -147,6 +181,48 @@ $(document).on('turbolinks:load', function(){
       $("#createOrganizationNextinvoice").blur(function() {
         $(this).attr("type", "text");
         $(this).val(setFormattedDate($(this).val()));
+=======
+
+      $("#createOrganizationNextinvoice").on("input",function() {
+
+        var input = $(this).val();
+        if (/\D\/$/.test(input)) input = input.substr(0, input.length - 3);
+        var values = input.split('/').map(function(v) {
+          return v.replace(/\D/g, '')
+        });
+        if (values[0]) values[0] = checkValue(values[0], 31);
+        if (values[1]) values[1] = checkValue(values[1], 12);
+        var output = values.map(function(v, i) {
+          return v.length == 2 && i < 2 ? v + '/' : v;
+        });
+        $(this).val(output.join('').substr(0, 14));
+        
+      });
+
+      $("#createOrganizationNextinvoice").blur(function() {
+
+        var input = $(this).val();
+        var values = input.split('/').map(function(v, i) {
+          return v.replace(/\D/g, '')
+        });
+        var output = '';
+        
+        if (values.length == 3) {
+          var year = values[2].length === 2 ? parseInt(values[2]) + 2000 : parseInt(values[2].substr(0, 4));
+          var month = parseInt(values[1]) - 1;
+          var day = parseInt(values[0]);
+          var d = new Date(year, month, day);
+          if (!isNaN(d)) {            
+            var dates = [d.getDate(), d.getMonth() + 1, d.getFullYear()];
+            output = dates.map(function(v) {
+              v = v.toString();
+              return v.length == 1 ? '0' + v : v;
+            }).join('/');
+          };
+        };
+
+        $(this).val(output);
+>>>>>>> desarrollo
       });
     
     } else if (action == "usersbyorganization") {
@@ -166,6 +242,7 @@ $(document).on('turbolinks:load', function(){
         $("[name*='user']").prop('checked', checked);
       });
 
+<<<<<<< HEAD
       $("#edit-organization").click(function() {
         if($("#select_user:checked").length == 0) {
           alert(getLocalizedString("administrator.usersbyorganization.select_a_user"))
@@ -175,6 +252,8 @@ $(document).on('turbolinks:load', function(){
         }
       });
 
+=======
+>>>>>>> desarrollo
       $("button[name='cbxOrganization']").click(function() {
         
         var strOrganization = $(this).html();
@@ -190,6 +269,7 @@ $(document).on('turbolinks:load', function(){
 });
 
 function showEditOrganization(target) {
+<<<<<<< HEAD
   
   var modal = $(target)
   var select_users = [];
@@ -211,6 +291,14 @@ function showEditOrganization(target) {
 
   $("#usersbyorganization_users").val(select_users)
   console.log("Select users: ", select_users);
+=======
+  var modal = $(target)
+  var user_uid = modal.data("user")
+  var user_organization = modal.data("organization")
+
+  $("#usersbyorganization_user_uid").val(user_uid)
+  $(".organization .selectpicker").selectpicker("val", user_organization ? user_organization : "")
+>>>>>>> desarrollo
 }
 
 function organizationDeleteConfirm() {
@@ -290,6 +378,18 @@ function showDeleteOrganization(target) {
   organizationDeleteConfirm();
 }
 
+<<<<<<< HEAD
+=======
+function checkValue(str, max) {
+  if (str.charAt(0) !== '0' || str == '00') {
+    var num = parseInt(str);
+    if (isNaN(num) || num <= 0 || num > max) num = 1;
+    str = num > parseInt(max.toString().charAt(0)) && num.toString().length == 1 ? '0' + num : num.toString();
+  };
+  return str;
+}
+
+>>>>>>> desarrollo
 function getFormattedDate(value) {
   
   if (!value) return value;
